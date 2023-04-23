@@ -9,7 +9,11 @@ RSpec.describe WeatherService do
         .to_return(status: 200, body: all_weather_info, headers: {})
 
         # Los Angeles, CA coordinates = 34.05357,-118.24545
-        expect(WeatherService.new.fetch_forecast("34.05357,-118.24545")).to be_a(Hash)
+        response = WeatherService.new.fetch_forecast("34.05357,-118.24545")
+        keys = %i[location current forecast]
+
+        expect(response).to be_a(Hash)
+        expect(response.keys).to eq(keys)
       end
     end
   end

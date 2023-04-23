@@ -8,7 +8,11 @@ RSpec.describe MapQuestService do
         stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=Roswell,%20NM")
         .to_return(status: 200, body: roswell_lat_lng, headers: {})
 
-        expect(MapQuestService.new.fetch_lat_lng("Roswell, NM")).to be_a(Hash)
+        response = MapQuestService.new.fetch_lat_lng("Roswell, NM")
+        keys = %i[info options results]
+
+        expect(response).to be_a(Hash)
+        expect(response.keys).to eq(keys)
       end
     end
 
@@ -20,7 +24,11 @@ RSpec.describe MapQuestService do
 
         # Roswell, NM coordinates = 33.39509,-104.52275
         # Los Angeles, CA coordinates = 34.05357,-118.24545
-        expect(MapQuestService.new.fetch_directions("33.39509,-104.52275", "34.05357,-118.24545")).to be_a(Hash)
+        response = MapQuestService.new.fetch_directions("33.39509,-104.52275", "34.05357,-118.24545")
+        keys = %i[route info]
+
+        expect(response).to be_a(Hash)
+        expect(response.keys).to eq(keys)
       end
     end
 
