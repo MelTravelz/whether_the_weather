@@ -55,6 +55,25 @@ RSpec.describe ForecastFacade do
           expect(current_weather[:icon]).to eq("//cdn.weatherapi.com/weather/64x64/day/113.png")
         end
       end
+
+      context "#helper_daily_weather" do
+        xit "returns a string of coordinates with no spaces" do
+          weather_service = @forecast_facade.weather_service
+          la_forecast = weather_service.fetch_forecast("34.05357,-118.24545")
+          daily_weather = @forecast_facade.helper_daily_weather(la_forecast)
+          #daily_weather not returning what the method is returning? 
+          
+          expect(daily_weather).to be_an(Array)
+          expect(daily_weather.first[:date]).to eq("2023-04-22")
+          expect(daily_weather.first[:sunrise]).to eq("06:13 AM")
+          expect(daily_weather.first[:sunset]).to eq("07:30 PM")
+          expect(daily_weather.first[:max_temp]).to eq(86.7)
+          expect(daily_weather.first[:min_temp]).to eq(64)
+          expect(daily_weather.first[:condition]).to eq("Sunny")
+          expect(daily_weather.first[:icon]).to eq("//cdn.weatherapi.com/weather/64x64/day/113.png")
+        end
+      end
+      
     end
   end
 end
