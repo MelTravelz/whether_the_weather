@@ -10,7 +10,6 @@ class ForecastFacade
   def forecast_info(location_name)
     coordinates_string = helper_fetch_lat_lng(location_name)
     all_weather_info = weather_service.fetch_forecast(coordinates_string)
-    require 'pry'; binding.pry
     x = Forecast.new(all_weather_info)
   end
 
