@@ -11,14 +11,13 @@ class ForecastFacade
     coordinates_string = helper_fetch_lat_lng(location_name)
     all_weather_info = weather_service.fetch_forecast(coordinates_string)
 
-    new_hash = {
+    new_all_weather_hash = {
       current_weather: helper_current_weather(all_weather_info),
       daily_weather: helper_daily_weather(all_weather_info),
       hourly_weather: helper_hourly_weather(all_weather_info)
     }
 
-    x = Forecast.new(new_hash)
-    # x = Forecast.new(all_weather_info)
+    Forecast.new(new_all_weather_hash)
   end
 
   def helper_fetch_lat_lng(location_name)
