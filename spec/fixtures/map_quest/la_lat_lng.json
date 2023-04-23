@@ -1,0 +1,54 @@
+{
+  "info": {
+      "statuscode": 0,
+      "copyright": {
+          "text": "© 2022 MapQuest, Inc.",
+          "imageUrl": "http://api.mqcdn.com/res/mqlogo.gif",
+          "imageAltText": "© 2022 MapQuest, Inc."
+      },
+      "messages": []
+  },
+  "options": {
+      "maxResults": -1,
+      "ignoreLatLngInput": false
+  },
+  "results": [
+      {
+          "providedLocation": {
+              "location": "Los Angeles, CA"
+          },
+          "locations": [
+              {
+                  "street": "",
+                  "adminArea6": "",
+                  "adminArea6Type": "Neighborhood",
+                  "adminArea5": "Los Angeles",
+                  "adminArea5Type": "City",
+                  "adminArea4": "Los Angeles",
+                  "adminArea4Type": "County",
+                  "adminArea3": "CA",
+                  "adminArea3Type": "State",
+                  "adminArea1": "US",
+                  "adminArea1Type": "Country",
+                  "postalCode": "",
+                  "geocodeQualityCode": "A5XAX",
+                  "geocodeQuality": "CITY",
+                  "dragPoint": false,
+                  "sideOfStreet": "N",
+                  "linkId": "0",
+                  "unknownInput": "",
+                  "type": "s",
+                  "latLng": {
+                      "lat": 34.05357,
+                      "lng": -118.24545
+                  },
+                  "displayLatLng": {
+                      "lat": 34.05357,
+                      "lng": -118.24545
+                  },
+                  "mapUrl": ""
+              }
+          ]
+      }
+  ]
+}
