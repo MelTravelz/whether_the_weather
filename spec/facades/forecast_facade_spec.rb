@@ -80,7 +80,13 @@ RSpec.describe ForecastFacade do
           la_forecast = weather_service.fetch_forecast("34.05357,-118.24545")
           hourly_weather = @forecast_facade.helper_hourly_weather(la_forecast)
 
-          expect(hourly_weather).to be_a(Hash)
+          expect(hourly_weather).to be_an(Array)
+          expect(hourly_weather.count).to eq(24)
+          
+          expect(hourly_weather.first[:time]).to eq("00:00")
+          expect(hourly_weather.first[:temperature]).to eq(69.8)
+          expect(hourly_weather.first[:conditions]).to eq("Clear")
+          expect(hourly_weather.first[:icon]).to eq("//cdn.weatherapi.com/weather/64x64/night/113.png")
         end
       end
     end

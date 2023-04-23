@@ -13,8 +13,8 @@ class ForecastFacade
 
     new_hash = {
       current_weather: helper_current_weather(all_weather_info),
-      daily_weather: helper_daily_weather(all_weather_info)
-      # hourly_weather: helper_hourly_weather(all_weather_info)
+      daily_weather: helper_daily_weather(all_weather_info),
+      hourly_weather: helper_hourly_weather(all_weather_info)
     }
 
     x = Forecast.new(new_hash)
@@ -61,7 +61,14 @@ class ForecastFacade
     end
   end
 
-  # def helper_hourly_weather(all_weather_info)
-  #   five_days = helper_5_days(all_weather_info)
-  # end
+  def helper_hourly_weather(all_weather_info)
+    all_weather_info[:forecast][:forecastday].first[:hour].map do |hourly_w|
+      {
+        time: hourly_w[:time].chars.last(5).join,
+        temperature: hourly_w[:temp_f],
+        conditions: hourly_w[:condition][:text],
+        icon: hourly_w[:condition][:icon]
+      }
+    end
+  end
 end
