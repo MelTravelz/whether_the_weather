@@ -1,7 +1,7 @@
 class MapQuestService
-  def fetch_lat_lng(city_state)
+  def fetch_lat_lng(location_name)
     response = conn.get("geocoding/v1/address") do |faraday|
-      faraday.params["location"] = city_state
+      faraday.params["location"] = location_name
     end
     JSON.parse(response.body, symbolize_names: true)
   end
