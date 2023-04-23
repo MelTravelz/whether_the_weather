@@ -8,14 +8,14 @@ RSpec.describe ForecastFacade do
         stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=Los%20Angeles,%20CA")
         .to_return(status: 200, body: la_lat_lng, headers: {})
 
-        la_weather_info = File.read("spec/fixtures/weather/LA_forecast.json")
+        la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
         stub_request(:get, "http://api.weatherapi.com/v1/forecast.json?days=5&key=#{ENV["WEATHER_API_KEY"]}&q=34.05357,-118.24545")
         .to_return(status: 200, body: la_weather_info, headers: {})
-
+        
         @forecast_facade = ForecastFacade.new
       end
 
-      context "#initialize" do
+      describe "#initialize" do
         it "exists and creates an instance of mapquest & weather services" do
           expect(@forecast_facade).to be_a(ForecastFacade)
           expect(@forecast_facade.mapquest_service).to be_a(MapQuestService)
@@ -23,25 +23,24 @@ RSpec.describe ForecastFacade do
         end
       end
 
-      context "#forecast_info" do
+      describe "#forecast_info" do
         it "returns all forecast info for a city,state" do
           expect(@forecast_facade.forecast_info("Los Angeles, CA")).to be_a(Forecast)
           # NOT FINISHED!
         end
       end
 
-      context "#helper_fetch_lat_lng" do
+      describe "#helper_fetch_lat_lng" do
         it "returns a string of coordinates with no spaces" do
           coordinates = @forecast_facade.helper_fetch_lat_lng("Los Angeles, CA")
-
           expect(coordinates).to eq("34.05357,-118.24545")
         end
       end
 
-      context "#helper_current_weather" do
-        it "returns a string of coordinates with no spaces" do
-          weather_service = @forecast_facade.weather_service
-          la_forecast = weather_service.fetch_forecast("34.05357,-118.24545")
+      describe "#helper_current_weather" do
+        it "returns a hash with 8 attributes" do
+          coordinates = @forecast_facade.helper_fetch_lat_lng("Los Angeles, CA")
+          la_forecast = @forecast_facade.weather_service.fetch_forecast(coordinates)
           current_weather = @forecast_facade.helper_current_weather(la_forecast)
 
           expect(current_weather).to be_a(Hash)
@@ -53,15 +52,15 @@ RSpec.describe ForecastFacade do
           expect(current_weather[:visibility]).to eq(9)
           expect(current_weather[:condition]).to eq("Sunny")
           expect(current_weather[:icon]).to eq("//cdn.weatherapi.com/weather/64x64/day/113.png")
+          # add test for what NOT there
         end
       end
 
       context "#helper_daily_weather" do
-        xit "returns a string of coordinates with no spaces" do
+        it "returns an array of hashes with 7 attributes" do
           weather_service = @forecast_facade.weather_service
           la_forecast = weather_service.fetch_forecast("34.05357,-118.24545")
           daily_weather = @forecast_facade.helper_daily_weather(la_forecast)
-          #daily_weather not returning what the method is returning? 
           
           expect(daily_weather).to be_an(Array)
           expect(daily_weather.first[:date]).to eq("2023-04-22")
@@ -71,9 +70,19 @@ RSpec.describe ForecastFacade do
           expect(daily_weather.first[:min_temp]).to eq(64)
           expect(daily_weather.first[:condition]).to eq("Sunny")
           expect(daily_weather.first[:icon]).to eq("//cdn.weatherapi.com/weather/64x64/day/113.png")
+          # add test for what NOT there
         end
       end
       
+      context "#helper_hourly_weather" do
+        it "returns an array of hashes with 4 attributes" do
+          weather_service = @forecast_facade.weather_service
+          la_forecast = weather_service.fetch_forecast("34.05357,-118.24545")
+          hourly_weather = @forecast_facade.helper_hourly_weather(la_forecast)
+
+          expect(hourly_weather).to be_a(Hash)
+        end
+      end
     end
   end
 end
