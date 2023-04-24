@@ -4,11 +4,11 @@ RSpec.describe TeleportService do
   describe "instance methods" do
     context "#fetch_area_salaries" do
       it "can return a json object" do
-        teleport_chicago_salaries = File.read("spec/fixtures/teleport/chicago_salaries.json")
-        stub_request(:get, "https://api.teleport.org/api/urban_areas/slug:chicago/salaries/")
-        .to_return(status: 200, body: teleport_chicago_salaries, headers: {})
+        teleport_la_salaries = File.read("spec/fixtures/teleport/la_salaries.json")
+        stub_request(:get, "https://api.teleport.org/api/urban_areas/slug:los-angeles/salaries/")
+        .to_return(status: 200, body: teleport_la_salaries, headers: {})
 
-        response = TeleportService.new.fetch_area_salaries("chicago")
+        response = TeleportService.new.fetch_area_salaries("los-angeles")
 
         expect(response).to be_a(Hash)
         expect(response.keys).to eq([:_links, :salaries])

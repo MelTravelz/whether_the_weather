@@ -33,7 +33,7 @@
           }
       ],
       "self": {
-          "href": "https://api.teleport.org/api/urban_areas/slug:chicago/salaries/"
+          "href": "https://api.teleport.org/api/urban_areas/slug:los-angeles/salaries/"
       }
   },
   "salaries": [
@@ -43,9 +43,9 @@
               "title": "Account Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 53732.4997858553,
-              "percentile_50": 67273.75507905365,
-              "percentile_75": 84227.57438186172
+              "percentile_25": 56663.363391478364,
+              "percentile_50": 70943.23262596269,
+              "percentile_75": 88821.80573450329
           }
       },
       {
@@ -65,9 +65,9 @@
               "title": "Administrative Assistant"
           },
           "salary_percentiles": {
-              "percentile_25": 34905.11247717241,
-              "percentile_50": 42036.17141703129,
-              "percentile_75": 50624.09435172754
+              "percentile_25": 34060.63394826133,
+              "percentile_50": 41019.16727190134,
+              "percentile_75": 49399.317882223695
           }
       },
       {
@@ -76,9 +76,9 @@
               "title": "Architect"
           },
           "salary_percentiles": {
-              "percentile_25": 60760.551047334375,
-              "percentile_50": 75238.00314257151,
-              "percentile_75": 93165.00623030383
+              "percentile_25": 50880.78663340384,
+              "percentile_50": 63004.18150336692,
+              "percentile_75": 78016.2247787097
           }
       },
       {
@@ -87,9 +87,9 @@
               "title": "Attorney"
           },
           "salary_percentiles": {
-              "percentile_25": 63082.25543040567,
-              "percentile_50": 85188.03908577877,
-              "percentile_75": 115040.30656111092
+              "percentile_25": 72268.99166051603,
+              "percentile_50": 97594.0641924785,
+              "percentile_75": 131793.74925206482
           }
       },
       {
@@ -109,9 +109,9 @@
               "title": "Business Development"
           },
           "salary_percentiles": {
-              "percentile_25": 58868.70108855463,
-              "percentile_50": 77992.50894101878,
-              "percentile_75": 103328.78657819632
+              "percentile_25": 67044.90955649878,
+              "percentile_50": 88824.80184964993,
+              "percentile_75": 117680.00696579054
           }
       },
       {
@@ -120,9 +120,9 @@
               "title": "C Level Executive"
           },
           "salary_percentiles": {
-              "percentile_25": 113224.23074482982,
-              "percentile_50": 169752.04555186332,
-              "percentile_75": 254501.68024531004
+              "percentile_25": 107701.09752313586,
+              "percentile_50": 161471.4579302288,
+              "percentile_75": 242086.96406749947
           }
       },
       {
@@ -131,9 +131,9 @@
               "title": "Cashier"
           },
           "salary_percentiles": {
-              "percentile_25": 21812.61822168686,
-              "percentile_50": 30558.38381953057,
-              "percentile_75": 42810.76265907945
+              "percentile_25": 16398.138523597616,
+              "percentile_50": 22972.969399931015,
+              "percentile_75": 32183.97760762306
           }
       },
       {
@@ -142,9 +142,9 @@
               "title": "Chef"
           },
           "salary_percentiles": {
-              "percentile_25": 33922.10804645942,
-              "percentile_50": 41665.604781025446,
-              "percentile_75": 51176.73168751686
+              "percentile_25": 39222.43742842259,
+              "percentile_50": 48175.85552724023,
+              "percentile_75": 59173.096012122645
           }
       },
       {
@@ -153,9 +153,9 @@
               "title": "Chemical Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 64799.938629398,
-              "percentile_50": 78520.54849359932,
-              "percentile_75": 95146.33294634895
+              "percentile_25": 71107.8972359815,
+              "percentile_50": 86164.14170991347,
+              "percentile_75": 104408.36538827197
           }
       },
       {
@@ -164,9 +164,9 @@
               "title": "Civil Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 75046.79203102979,
-              "percentile_50": 89467.74100530887,
-              "percentile_75": 106659.81135187489
+              "percentile_25": 59537.1216624495,
+              "percentile_50": 70977.74119988058,
+              "percentile_75": 84616.78370008653
           }
       },
       {
@@ -186,9 +186,9 @@
               "title": "Copywriter"
           },
           "salary_percentiles": {
-              "percentile_25": 37874.33329144154,
-              "percentile_50": 46571.95367417419,
-              "percentile_75": 57266.9319969137
+              "percentile_25": 44999.207872282255,
+              "percentile_50": 55333.014266028775,
+              "percentile_75": 68039.9192015657
           }
       },
       {
@@ -197,9 +197,9 @@
               "title": "Customer Support"
           },
           "salary_percentiles": {
-              "percentile_25": 28709.782495494794,
-              "percentile_50": 36911.39045392457,
-              "percentile_75": 47455.97586661874
+              "percentile_25": 28178.119866978843,
+              "percentile_50": 36227.84618512116,
+              "percentile_75": 46577.161478783746
           }
       },
       {
@@ -208,9 +208,9 @@
               "title": "Data Analyst"
           },
           "salary_percentiles": {
-              "percentile_25": 46898.18614517015,
-              "percentile_50": 56442.498784333024,
-              "percentile_75": 67929.18726447425
+              "percentile_25": 50918.030670746884,
+              "percentile_50": 61280.42724990637,
+              "percentile_75": 73751.68902768532
           }
       },
       {
@@ -219,9 +219,9 @@
               "title": "Data Scientist"
           },
           "salary_percentiles": {
-              "percentile_25": 71025.60310363481,
-              "percentile_50": 85799.94207526707,
-              "percentile_75": 103647.55438088557
+              "percentile_25": 96653.39804555834,
+              "percentile_50": 116758.6840643435,
+              "percentile_75": 141046.15647358153
           }
       },
       {
@@ -230,9 +230,9 @@
               "title": "Dentist"
           },
           "salary_percentiles": {
-              "percentile_25": 96511.24909217832,
-              "percentile_50": 125690.57152330533,
-              "percentile_75": 163692.00397319777
+              "percentile_25": 103070.26597758452,
+              "percentile_50": 134232.64923211504,
+              "percentile_75": 174816.70343016903
           }
       },
       {
@@ -241,9 +241,9 @@
               "title": "Electrical Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 59916.38674346041,
-              "percentile_50": 71433.42639972051,
-              "percentile_75": 85164.25446434696
+              "percentile_25": 68395.12069132873,
+              "percentile_50": 81541.93013596612,
+              "percentile_75": 97215.79994436304
           }
       },
       {
@@ -252,9 +252,9 @@
               "title": "Executive Assistant"
           },
           "salary_percentiles": {
-              "percentile_25": 45674.4959297919,
-              "percentile_50": 55243.43643899304,
-              "percentile_75": 66817.09797695777
+              "percentile_25": 40886.04071182516,
+              "percentile_50": 49451.78584530268,
+              "percentile_75": 59812.07964170497
           }
       },
       {
@@ -263,9 +263,9 @@
               "title": "Fashion Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 32117.744775095885,
-              "percentile_50": 41461.36995405689,
-              "percentile_75": 53523.22245863665
+              "percentile_25": 38930.59974152279,
+              "percentile_50": 50256.20600065727,
+              "percentile_75": 64876.633248643244
           }
       },
       {
@@ -285,9 +285,9 @@
               "title": "Financial Analyst"
           },
           "salary_percentiles": {
-              "percentile_25": 59832.26928250057,
-              "percentile_50": 69632.27825690183,
-              "percentile_75": 81037.44406473168
+              "percentile_25": 63994.514102506764,
+              "percentile_50": 74476.26283187135,
+              "percentile_75": 86674.83147879249
           }
       },
       {
@@ -296,9 +296,9 @@
               "title": "Graphic Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 36203.161400833036,
-              "percentile_50": 43108.832136571385,
-              "percentile_75": 51331.74386633341
+              "percentile_25": 43882.61986263861,
+              "percentile_50": 52253.12986072973,
+              "percentile_75": 62220.29561564354
           }
       },
       {
@@ -307,9 +307,9 @@
               "title": "Hardware Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 52769.250831976795,
-              "percentile_50": 64112.11752642755,
-              "percentile_75": 77893.15840034031
+              "percentile_25": 71364.12969159415,
+              "percentile_50": 86704.00655939245,
+              "percentile_75": 105341.22374838758
           }
       },
       {
@@ -318,9 +318,9 @@
               "title": "Human Resources Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 65243.635415043165,
-              "percentile_50": 79672.03299727192,
-              "percentile_75": 97291.21931263225
+              "percentile_25": 66672.32816322631,
+              "percentile_50": 81416.67605212088,
+              "percentile_75": 99421.68395781469
           }
       },
       {
@@ -329,9 +329,9 @@
               "title": "IT Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 82165.02950974903,
-              "percentile_50": 100683.11130015366,
-              "percentile_75": 123374.73693569774
+              "percentile_25": 71337.0799028304,
+              "percentile_50": 87414.79429960056,
+              "percentile_75": 107116.0506268255
           }
       },
       {
@@ -340,9 +340,9 @@
               "title": "Industrial Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 50723.55629564521,
-              "percentile_50": 62310.615118063666,
-              "percentile_75": 76544.56903142652
+              "percentile_25": 46388.20961574684,
+              "percentile_50": 56984.921514647474,
+              "percentile_75": 70002.29814707524
           }
       },
       {
@@ -351,9 +351,9 @@
               "title": "Interior Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 45676.209755777396,
-              "percentile_50": 55113.99852282833,
-              "percentile_75": 66501.85839445918
+              "percentile_25": 53103.235735355134,
+              "percentile_50": 64075.624299298324,
+              "percentile_75": 77315.16869905803
           }
       },
       {
@@ -362,9 +362,9 @@
               "title": "Lecturer"
           },
           "salary_percentiles": {
-              "percentile_25": 52982.09346223906,
-              "percentile_50": 65286.9730550912,
-              "percentile_75": 80449.61178693434
+              "percentile_25": 45690.97965123638,
+              "percentile_50": 56302.52723371529,
+              "percentile_75": 69378.56437091022
           }
       },
       {
@@ -373,9 +373,9 @@
               "title": "Marketing Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 57315.3210589627,
-              "percentile_50": 71989.48240231263,
-              "percentile_75": 90420.59750867376
+              "percentile_25": 57801.04412476542,
+              "percentile_50": 72599.56276177916,
+              "percentile_75": 91186.8737496254
           }
       },
       {
@@ -384,9 +384,9 @@
               "title": "Mechanical Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 57877.02085967939,
-              "percentile_50": 67858.69424034467,
-              "percentile_75": 79561.84191250536
+              "percentile_25": 62245.097904705486,
+              "percentile_50": 72980.10513127605,
+              "percentile_75": 85566.50923942837
           }
       },
       {
@@ -395,9 +395,9 @@
               "title": "Mobile Developer"
           },
           "salary_percentiles": {
-              "percentile_25": 50649.8712176599,
-              "percentile_50": 63346.924835957834,
-              "percentile_75": 79226.91192891626
+              "percentile_25": 81381.25376109958,
+              "percentile_50": 101782.13765220034,
+              "percentile_75": 127297.17307456095
           }
       },
       {
@@ -406,9 +406,9 @@
               "title": "Nurse"
           },
           "salary_percentiles": {
-              "percentile_25": 58312.05327272678,
-              "percentile_50": 64870.5140355594,
-              "percentile_75": 72166.61659221533
+              "percentile_25": 69775.1064898605,
+              "percentile_50": 77622.83730788292,
+              "percentile_75": 86353.2164239927
           }
       },
       {
@@ -417,9 +417,9 @@
               "title": "Office Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 39304.92420450415,
-              "percentile_50": 48053.025011263024,
-              "percentile_75": 58748.191466260585
+              "percentile_25": 37596.014454336735,
+              "percentile_50": 45963.76305424719,
+              "percentile_75": 56193.92227527141
           }
       },
       {
@@ -428,9 +428,9 @@
               "title": "Operations Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 50879.20738902692,
-              "percentile_50": 64844.4031674673,
-              "percentile_75": 82642.73045754815
+              "percentile_25": 51830.2206137407,
+              "percentile_50": 66056.44808658933,
+              "percentile_75": 84187.45438755621
           }
       },
       {
@@ -439,9 +439,9 @@
               "title": "Pharmacist"
           },
           "salary_percentiles": {
-              "percentile_25": 94472.47605241014,
-              "percentile_50": 105244.23766919838,
-              "percentile_75": 117244.19667402313
+              "percentile_25": 86185.41674400275,
+              "percentile_50": 96012.28700305676,
+              "percentile_75": 106959.61804000681
           }
       },
       {
@@ -450,9 +450,9 @@
               "title": "Physician"
           },
           "salary_percentiles": {
-              "percentile_25": 110646.51142650044,
-              "percentile_50": 150751.58858520782,
-              "percentile_75": 205393.2037076476
+              "percentile_25": 116419.37289554086,
+              "percentile_50": 158616.88885895157,
+              "percentile_75": 216109.37085073974
           }
       },
       {
@@ -461,9 +461,9 @@
               "title": "Postdoctoral Researcher"
           },
           "salary_percentiles": {
-              "percentile_25": 48274.38015980691,
-              "percentile_50": 54596.85247930749,
-              "percentile_75": 61747.37595344791
+              "percentile_25": 42185.71961561079,
+              "percentile_50": 47710.762973913515,
+              "percentile_75": 53959.4185969654
           }
       },
       {
@@ -472,9 +472,9 @@
               "title": "Product Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 70496.60571717432,
-              "percentile_50": 86631.88545667395,
-              "percentile_75": 106460.2118276156
+              "percentile_25": 75065.83015028333,
+              "percentile_50": 92246.915076031,
+              "percentile_75": 113360.4107755592
           }
       },
       {
@@ -483,9 +483,9 @@
               "title": "Project Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 61577.92615845636,
-              "percentile_50": 76115.02975462301,
-              "percentile_75": 94084.0024335821
+              "percentile_25": 68855.31742552496,
+              "percentile_50": 85110.44235980259,
+              "percentile_75": 105203.02090708213
           }
       },
       {
@@ -494,9 +494,9 @@
               "title": "QA Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 46022.824981352605,
-              "percentile_50": 56733.428314123645,
-              "percentile_75": 69936.64316734018
+              "percentile_25": 55785.24241302826,
+              "percentile_50": 68767.79189890968,
+              "percentile_75": 84771.68867778049
           }
       },
       {
@@ -505,9 +505,9 @@
               "title": "Receptionist"
           },
           "salary_percentiles": {
-              "percentile_25": 31773.44476169944,
-              "percentile_50": 38482.94570787393,
-              "percentile_75": 46609.27140453885
+              "percentile_25": 20335.004648446837,
+              "percentile_50": 24629.085253152287,
+              "percentile_75": 29829.93369777145
           }
       },
       {
@@ -516,9 +516,9 @@
               "title": "Research Scientist"
           },
           "salary_percentiles": {
-              "percentile_25": 46211.44680158965,
-              "percentile_50": 59225.48088797975,
-              "percentile_75": 75904.51780210856
+              "percentile_25": 53756.172813253936,
+              "percentile_50": 68894.9471494195,
+              "percentile_75": 88297.09211648011
           }
       },
       {
@@ -527,9 +527,9 @@
               "title": "Sales Manager"
           },
           "salary_percentiles": {
-              "percentile_25": 62723.70473367223,
-              "percentile_50": 82899.7616965144,
-              "percentile_75": 109565.76175656845
+              "percentile_25": 56978.021863367896,
+              "percentile_50": 75305.89039935962,
+              "percentile_75": 99529.20342582701
           }
       },
       {
@@ -538,9 +538,9 @@
               "title": "Software Engineer"
           },
           "salary_percentiles": {
-              "percentile_25": 67646.2253013339,
-              "percentile_50": 82451.1152192146,
-              "percentile_75": 100496.16768133474
+              "percentile_25": 72030.70286953845,
+              "percentile_50": 87795.16898320116,
+              "percentile_75": 107009.80817512654
           }
       },
       {
@@ -549,9 +549,9 @@
               "title": "Systems Administrator"
           },
           "salary_percentiles": {
-              "percentile_25": 54967.079284456646,
-              "percentile_50": 66153.69042177942,
-              "percentile_75": 79616.94187484588
+              "percentile_25": 52811.5075442126,
+              "percentile_50": 63559.428051849136,
+              "percentile_75": 76494.70886427842
           }
       },
       {
@@ -560,9 +560,9 @@
               "title": "Teacher"
           },
           "salary_percentiles": {
-              "percentile_25": 39113.53791673373,
-              "percentile_50": 48375.53632818964,
-              "percentile_75": 59830.7552751142
+              "percentile_25": 40844.22544728083,
+              "percentile_50": 50516.04679258003,
+              "percentile_75": 62478.13382687183
           }
       },
       {
@@ -571,9 +571,9 @@
               "title": "UX Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 57210.412719627224,
-              "percentile_50": 70148.37349965962,
-              "percentile_75": 86012.21474774585
+              "percentile_25": 57782.51685110708,
+              "percentile_50": 70849.85723870549,
+              "percentile_75": 86872.33689871324
           }
       },
       {
@@ -582,9 +582,9 @@
               "title": "Waiter"
           },
           "salary_percentiles": {
-              "percentile_25": 19389.074535197138,
-              "percentile_50": 29677.96887062652,
-              "percentile_75": 45426.70846341771
+              "percentile_25": 17981.803005489903,
+              "percentile_50": 27523.922729704725,
+              "percentile_75": 42129.60859372494
           }
       },
       {
@@ -593,9 +593,9 @@
               "title": "Web Designer"
           },
           "salary_percentiles": {
-              "percentile_25": 39266.41094306577,
-              "percentile_50": 48047.17730025475,
-              "percentile_75": 58791.50121128626
+              "percentile_25": 46219.83788314405,
+              "percentile_50": 56555.531612059516,
+              "percentile_75": 69202.49620973112
           }
       },
       {
@@ -604,9 +604,9 @@
               "title": "Web Developer"
           },
           "salary_percentiles": {
-              "percentile_25": 53704.53793049536,
-              "percentile_50": 66545.38666217329,
-              "percentile_75": 82456.50473241684
+              "percentile_25": 58677.18033344793,
+              "percentile_50": 72706.99654029415,
+              "percentile_75": 90091.36628361428
           }
       }
   ]
