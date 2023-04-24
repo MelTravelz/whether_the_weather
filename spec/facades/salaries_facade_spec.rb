@@ -8,8 +8,8 @@ RSpec.describe SalariesFacade do
         stub_request(:get, "https://api.teleport.org/api/urban_areas/slug:los-angeles/salaries/")
         .to_return(status: 200, body: teleport_la_salaries, headers: {})
 
-        la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
-        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
+        la_lat_lng = File.read("spec/fixtures/map_quest/for_final_la_dash_lat_lng.json")
+        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=los-angeles")
         .to_return(status: 200, body: la_lat_lng, headers: {})
 
         la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
@@ -23,7 +23,7 @@ RSpec.describe SalariesFacade do
         it "exists and creates an instance of mapquest & weather services & forecast facade" do
           expect(@salaries_facade).to be_a(SalariesFacade)
           expect(@salaries_facade.teleport_service).to be_a(TeleportService)
-          # expect(@salaries_facade.forecast_facade).to be_a(ForecastFacade)
+          expect(@salaries_facade.forecast_facade).to be_a(ForecastFacade)
           # expect(@salaries_facade.mapquest_service).to be_a(MapQuestService)
           # expect(@salaries_facade.weather_service).to be_a(WeatherService)
         end
