@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
       post "/users", to: "users#create"
 
-      get "/salaries", to: "salaries#show"
+      get "/salaries", to: "salaries#index"
     end
   end
 end
