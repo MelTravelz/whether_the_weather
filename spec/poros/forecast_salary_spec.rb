@@ -25,6 +25,9 @@ RSpec.describe ForecastSalary, type: :model do
             { title: "Cool Tech Job 2", min: "$120500.75", max: "$500120.25"}
           ]
 
+        expect(cool_place_info).to be_a(ForecastSalary)
+        expect(cool_place_info.id).to eq(nil)
+
         expect(cool_place_info.destination).to be_a(String)
         expect(cool_place_info.destination).to eq("cool-place")
 

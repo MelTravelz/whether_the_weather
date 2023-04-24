@@ -37,8 +37,7 @@ class SalariesFacade
       salaries: salaries_array
     }
 
-    require 'pry'; binding.pry
-    x = ForecastSalary.new(new_hash)
+    ForecastSalary.new(new_hash)
   end
 
 end
