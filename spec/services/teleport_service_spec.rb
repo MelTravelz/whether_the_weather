@@ -11,7 +11,7 @@ RSpec.describe TeleportService do
         response = TeleportService.new.fetch_area_salaries("chicago")
 
         expect(response).to be_a(Hash)
-        # expect(response.keys).to eq([KEY NAMES HERE])
+        expect(response.keys).to eq([:_links, :salaries])
       end
     end
   end
