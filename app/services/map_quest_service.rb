@@ -3,7 +3,6 @@ class MapQuestService
     response = conn.get("geocoding/v1/address") do |faraday|
       faraday.params["location"] = location_name
     end
-    require 'pry'; binding.pry
     JSON.parse(response.body, symbolize_names: true)
   end
 
