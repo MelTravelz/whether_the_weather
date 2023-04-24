@@ -1,10 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ForecastSalary, type: :model do
-  let(:great_place_information) {
+  let(:cool_place_information) {
     {
       destination: "cool-place",
-      forecast: { summary: "Stormy", temperature: "32 F"},
+      forecast: { summary: "Freezey-Breezey", temperature: "10 F" },
       salaries:
       [
         { title: "Cool Tech Job 1", min: "$100100.03", max: "$200200.06"},
@@ -16,9 +16,9 @@ RSpec.describe ForecastSalary, type: :model do
   describe "instance methods" do
     describe "#initialize" do
       it "exists & has attributes" do
-        cool_place_info = ForecastSalary.new(cool_place_inforomation)
+        cool_place_info = ForecastSalary.new(cool_place_information)
 
-        forecast_hash = { summary: "Stormy", temperature: "10 F"}
+        forecast_hash = { summary: "Freezey-Breezey", temperature: "10 F" }
         salaries_array = 
           [
             { title: "Cool Tech Job 1", min: "$100100.03", max: "$200200.06"},
