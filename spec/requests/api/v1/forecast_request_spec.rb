@@ -83,6 +83,28 @@ RSpec.describe "/api/v1/forecast" do
 
         expect(error_response).to eq(expected_hash)
       end
+
+      it "returns error json object when city,state is not entered/empty" do
+        empty = File.read("spec/fixtures/map_quest/empty_lat_lng.json")
+        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=")
+        .to_return(status: 200, body: empty, headers: {})
+
+        get '/api/v1/forecast?location='
+
+        error_response = JSON.parse(response.body, symbolize_names: true)
+
+        expected_hash = 
+          {
+            "errors":
+            [{
+                "status": '404',
+                "title": 'Invalid Request',
+                "detail": ["Location name cannot be blank."]
+              }]
+          }
+
+        expect(error_response).to eq(expected_hash)
+      end
     end
   end
 end
