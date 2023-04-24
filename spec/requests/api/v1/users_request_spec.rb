@@ -29,16 +29,7 @@ RSpec.describe "/api/v1/users" do
     end
 
     describe "sad path tests" do
-      it "returns error message when password & password_confirmation don't match" do
-        user_params = { email: "HarrySchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
-
-        headers = {"CONTENT_TYPE" => "application/json"}
-        post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
-
-        expect(response).to have_http_status(404)
-        error_response = JSON.parse(response.body, symbolize_names: true)
-
-        expected_hash = 
+      let(:expected_hash) { 
         {
           "errors":
           [{
@@ -47,30 +38,40 @@ RSpec.describe "/api/v1/users" do
               "detail": ["Credentials are incorrect."]
             }]
         }
+      }
 
-      expect(error_response).to eq(expected_hash)
+      it "returns error message when password & password_confirmation don't match" do
+        user_params = { email: "HarrySchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
+
+        expect(response).to have_http_status(404)
+        error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response).to eq(expected_hash)
       end
 
       it "returns error message when input is nil/empty" do
         user_params = { email: nil, password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
-
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
         expect(response).to have_http_status(404)
         error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response).to eq(expected_hash)
+      end
 
-        expected_hash = 
-        {
-          "errors":
-          [{
-              "status": '404',
-              "title": 'Invalid Request',
-              "detail": ["Credentials are incorrect."]
-            }]
-        }
+      it "returns error message when email is already taken/not unique" do
+        harry1 = User.create!({email: "harryschoolemail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!" })
+        
+        user_params = { email: "HarrySchoolEmail@hogwarts.com", password: "NotHarry", password_confirmation: "NotHarry" } 
+        
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
-      expect(error_response).to eq(expected_hash)
+        expect(response).to have_http_status(404)
+        error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(error_response).to eq(expected_hash)
+
       end
     end
   end

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       get "/forecast", to: "forecast#index"
 
       post "/users", to: "users#create"
+
+      # unRESTful route:
+      post "/sessions", to: "users#login"
     end
   end
 end
