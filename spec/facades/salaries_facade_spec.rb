@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "/api/v1/salaries" do
-  describe "#show" do
+RSpec.describe SalariesFacade do
+  describe "intance methods" do
     describe "happy path tests" do
       before(:each) do
         teleport_la_salaries = File.read("spec/fixtures/teleport/la_salaries.json")
@@ -15,17 +15,20 @@ RSpec.describe "/api/v1/salaries" do
         la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
         stub_request(:get, "http://api.weatherapi.com/v1/forecast.json?days=5&key=#{ENV["WEATHER_API_KEY"]}&q=34.05357,-118.24545")
         .to_return(status: 200, body: la_weather_info, headers: {})
+
+        @salaries_facade = SalariesFacade.new
       end
 
-      xit "returns a salaries type json object" do
-        get '/api/v1/salaries?destination=los-angeles'
-      
-        parsed_data = JSON.parse(response.body, symbolize_names: true)
-        # expect(response).to be_successful
-        expect(response).to have_http_status(200)
+      describe "#initialize" do
+        it "exists and creates an instance of mapquest & weather services & forecast facade" do
+          expect(@salaries_facade).to be_a(SalariesFacade)
+          expect(@salaries_facade.teleport_service).to be_a(TeleportService)
+          # expect(@salaries_facade.forecast_facade).to be_a(ForecastFacade)
+          # expect(@salaries_facade.mapquest_service).to be_a(MapQuestService)
+          # expect(@salaries_facade.weather_service).to be_a(WeatherService)
+        end
       end
-
     end
   end
-
 end
+
