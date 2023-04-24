@@ -1,0 +1,54 @@
+{
+  "info": {
+      "statuscode": 0,
+      "copyright": {
+          "text": "© 2022 MapQuest, Inc.",
+          "imageUrl": "http://api.mqcdn.com/res/mqlogo.gif",
+          "imageAltText": "© 2022 MapQuest, Inc."
+      },
+      "messages": []
+  },
+  "options": {
+      "maxResults": -1,
+      "ignoreLatLngInput": false
+  },
+  "results": [
+      {
+          "providedLocation": {
+              "location": "Rowswell, NM"
+          },
+          "locations": [
+              {
+                  "street": "",
+                  "adminArea6": "",
+                  "adminArea6Type": "Neighborhood",
+                  "adminArea5": "Roswell",
+                  "adminArea5Type": "City",
+                  "adminArea4": "Chaves",
+                  "adminArea4Type": "County",
+                  "adminArea3": "NM",
+                  "adminArea3Type": "State",
+                  "adminArea1": "US",
+                  "adminArea1Type": "Country",
+                  "postalCode": "",
+                  "geocodeQualityCode": "A5XBX",
+                  "geocodeQuality": "CITY",
+                  "dragPoint": false,
+                  "sideOfStreet": "N",
+                  "linkId": "0",
+                  "unknownInput": "",
+                  "type": "s",
+                  "latLng": {
+                      "lat": 33.39509,
+                      "lng": -104.52275
+                  },
+                  "displayLatLng": {
+                      "lat": 33.39509,
+                      "lng": -104.52275
+                  },
+                  "mapUrl": ""
+              }
+          ]
+      }
+  ]
+}
