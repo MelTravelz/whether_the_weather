@@ -20,7 +20,7 @@ class ForecastFacade
     Forecast.new(new_all_weather_hash)
   end
 
-  ###### Called in Controller ONLY:
+  ###### Called in Controller & SalariesFacade ONLY:
   def helper_fetch_lat_lng(location_name)
     info_hash = mapquest_service.fetch_lat_lng(location_name)
     if info_hash[:results].first[:locations].first[:source].present? 

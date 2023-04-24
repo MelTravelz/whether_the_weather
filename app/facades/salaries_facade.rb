@@ -23,7 +23,7 @@ class SalariesFacade
           # min: "$#{(salary_hash[:salary_percentiles][:percentile_25]).truncate(2)}",
           # max: "$#{(salary_hash[:salary_percentiles][:percentile_75].truncate(2))}"
 
-          # Didn't get work back from instructors if I can use this gem:
+          # Didn't get word back from instructors if I can use this gem:
           # http://vaidehijoshi.github.io/blog/2015/02/10/money-makes-the-world-go-round-using-money-rails-and-bigdecimal/
           # min: Money.new(salary_hash[:salary_percentiles][:percentile_25], "USD").format,
         }
