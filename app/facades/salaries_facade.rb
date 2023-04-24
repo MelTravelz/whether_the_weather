@@ -29,15 +29,16 @@ class SalariesFacade
     
 
     new_hash = {
+      destination: destination_name,
       forecast: {
-        summary: current_w[:temperature],
-        temperature: "#{current_w[:condition]} F"
+        summary: current_w[:condition],
+        temperature: "#{current_w[:temperature]} F"
       },
       salaries: salaries_array
     }
 
-    x = ForecastSalaries.new(new_hash)
     require 'pry'; binding.pry
+    x = ForecastSalary.new(new_hash)
   end
 
 end

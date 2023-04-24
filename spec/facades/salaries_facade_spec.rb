@@ -33,7 +33,7 @@ RSpec.describe SalariesFacade do
         it "returns salary info for specific jobs & forecast for destination" do
           la_forecast_salaries = @salaries_facade.find_salary_and_forecast("los-angeles")
           
-          expect(la_forecast_salaries).to be_a(ForecastSalaries)
+          expect(la_forecast_salaries).to be_a(ForecastSalary)
           expect(la_forecast_salaries.id).to eq(nil)
         end
       end
