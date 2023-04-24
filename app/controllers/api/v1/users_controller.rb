@@ -8,6 +8,7 @@ class Api::V1::UsersController < ApplicationController
 
     if new_user.save 
       new_user.update(api_key: SecureRandom.hex)
+      # Refactor: add sessions
       # session[:id] = new_user.id
       render json: UsersSerializer.new(new_user), status: 201
     else
@@ -21,6 +22,7 @@ class Api::V1::UsersController < ApplicationController
     returning_user = User.find_by(email: new_params[:email])
 
     if returning_user.authenticate(params[:password])
+      # Refactor: add session:
       # session[:id] = returning_user.id
       render json: UsersSerializer.new(returning_user), status: 200
     else
