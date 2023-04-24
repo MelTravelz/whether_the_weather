@@ -24,8 +24,6 @@ RSpec.describe SalariesFacade do
           expect(@salaries_facade).to be_a(SalariesFacade)
           expect(@salaries_facade.teleport_service).to be_a(TeleportService)
           expect(@salaries_facade.forecast_facade).to be_a(ForecastFacade)
-          # expect(@salaries_facade.mapquest_service).to be_a(MapQuestService)
-          # expect(@salaries_facade.weather_service).to be_a(WeatherService)
         end
       end
 
@@ -35,9 +33,11 @@ RSpec.describe SalariesFacade do
           
           expect(la_forecast_salaries).to be_a(ForecastSalary)
           expect(la_forecast_salaries.id).to eq(nil)
+          expect(la_forecast_salaries.destination).to be_a(String)
+          expect(la_forecast_salaries.forecast).to be_a(Hash)
+          expect(la_forecast_salaries.salaries).to be_an(Array)
         end
       end
-
     end
   end
 end

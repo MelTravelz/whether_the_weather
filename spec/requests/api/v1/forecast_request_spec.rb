@@ -13,7 +13,7 @@ RSpec.describe "/api/v1/forecast" do
         .to_return(status: 200, body: la_weather_info, headers: {})
       end
 
-      it "returns a forecast type json object" do
+      it "returns a 'forecast' type json object" do
         get '/api/v1/forecast?location=losangeles,ca'
       
         parsed_data = JSON.parse(response.body, symbolize_names: true)
