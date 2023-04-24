@@ -65,10 +65,11 @@ RSpec.describe "/api/v1/forecast" do
       it "returns error json object when city,state is not valid" do
         xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
         stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
-        .to_return(status: 200, body: xyz_abc, headers: {})
+        .to_return(status: 404, body: xyz_abc, headers: {})
 
         get '/api/v1/forecast?location=xyz,abc'
 
+        expect(response).to have_http_status(404)
         error_response = JSON.parse(response.body, symbolize_names: true)
 
         expected_hash = 
@@ -87,10 +88,11 @@ RSpec.describe "/api/v1/forecast" do
       it "returns error json object when city,state is not entered/empty" do
         empty = File.read("spec/fixtures/map_quest/empty_lat_lng.json")
         stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=")
-        .to_return(status: 200, body: empty, headers: {})
+        .to_return(status: 404, body: empty, headers: {})
 
         get '/api/v1/forecast?location='
 
+        expect(response).to have_http_status(404)
         error_response = JSON.parse(response.body, symbolize_names: true)
 
         expected_hash = 
