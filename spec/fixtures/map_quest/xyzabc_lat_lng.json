@@ -1,0 +1,50 @@
+{
+  "info": {
+      "statuscode": 0,
+      "copyright": {
+          "text": "© 2022 MapQuest, Inc.",
+          "imageUrl": "http://api.mqcdn.com/res/mqlogo.gif",
+          "imageAltText": "© 2022 MapQuest, Inc."
+      },
+      "messages": []
+  },
+  "options": {
+      "maxResults": -1,
+      "ignoreLatLngInput": false
+  },
+  "results": [
+      {
+          "providedLocation": {
+              "location": "xyz,abc"
+          },
+          "locations": [
+              {
+                  "street": "",
+                  "adminArea6": "",
+                  "adminArea5": "",
+                  "adminArea4": "",
+                  "adminArea3": "",
+                  "adminArea1": "US",
+                  "postalCode": "",
+                  "geocodeQualityCode": "A1XAX",
+                  "geocodeQuality": "COUNTRY",
+                  "dragPoint": false,
+                  "sideOfStreet": "N",
+                  "linkId": "0",
+                  "unknownInput": "",
+                  "type": "s",
+                  "latLng": {
+                      "lat": 38.89037,
+                      "lng": -77.03196
+                  },
+                  "displayLatLng": {
+                      "lat": 38.89037,
+                      "lng": -77.03196
+                  },
+                  "mapUrl": "",
+                  "source": "FALLBACK"
+              }
+          ]
+      }
+  ]
+}

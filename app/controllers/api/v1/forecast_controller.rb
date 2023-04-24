@@ -1,6 +1,14 @@
 class Api::V1::ForecastController < ApplicationController
   def index
-    all_forecast_info = ForecastFacade.new.forecast_info(params[:location])
-    render json: ForecastSerializer.new(all_forecast_info)
+    forecast_facade = ForecastFacade.new
+    location_coordinates = forecast_facade.helper_fetch_lat_lng(params[:location])
+
+    if location_coordinates == "invalid location name"
+      render json: ErrorSerializer.new("Location name is invalid.").invalid_request
+    else
+      all_forecast_info = forecast_facade.forecast_info(location_coordinates)
+      render json: ForecastSerializer.new(all_forecast_info)
+    end
+
   end
 end

@@ -7,9 +7,9 @@ class ForecastFacade
     @weather_service = WeatherService.new
   end
 
-  def forecast_info(location_name)
-    coordinates_string = helper_fetch_lat_lng(location_name)
-    all_weather_info = weather_service.fetch_forecast(coordinates_string)
+  def forecast_info(location_coordinates)
+    # coordinates_string = helper_fetch_lat_lng(location_name)
+    all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
       current_weather: helper_current_weather(all_weather_info),
@@ -20,10 +20,16 @@ class ForecastFacade
     Forecast.new(new_all_weather_hash)
   end
 
+  ###### Called in Controller ONLY:
   def helper_fetch_lat_lng(location_name)
     info_hash = mapquest_service.fetch_lat_lng(location_name)
-    "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
+    if info_hash[:results].first[:locations].first[:source].present? 
+      return "invalid location name"
+    else
+      "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
+    end
   end
+  #########
 
   def helper_5_days(all_weather_info)
     all_weather_info[:forecast][:forecastday].map do |forecast_day|
