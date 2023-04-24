@@ -28,6 +28,16 @@ RSpec.describe SalariesFacade do
           # expect(@salaries_facade.weather_service).to be_a(WeatherService)
         end
       end
+
+      describe "#find_salary_and_forecast" do
+        it "returns salary info for specific jobs & forecast for destination" do
+          la_forecast_salaries = @salaries_facade.find_salary_and_forecast("los-angeles")
+          
+          expect(la_forecast_salaries).to be_a(ForecastSalaries)
+          expect(la_forecast_salaries.id).to eq(nil)
+        end
+      end
+
     end
   end
 end
