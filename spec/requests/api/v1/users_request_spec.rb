@@ -52,27 +52,26 @@ RSpec.describe "/api/v1/users" do
       end
 
       it "returns error message when input is nil/empty" do
-      #   user_params = { email: nil, password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
+        user_params = { email: nil, password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
 
-      #   headers = {"CONTENT_TYPE" => "application/json"}
-      #   post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
-      #   expect(response).to have_http_status(404)
-      #   error_response = JSON.parse(response.body, symbolize_names: true)
+        expect(response).to have_http_status(404)
+        error_response = JSON.parse(response.body, symbolize_names: true)
 
-      #   expected_hash = 
-      #   {
-      #     "errors":
-      #     [{
-      #         "status": '404',
-      #         "title": 'Invalid Request',
-      #         "detail": ["Credentials are incorrect."]
-      #       }]
-      #   }
+        expected_hash = 
+        {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": ["Credentials are incorrect."]
+            }]
+        }
 
-      # expect(error_response).to eq(expected_hash)
+      expect(error_response).to eq(expected_hash)
       end
     end
-
   end
 end
