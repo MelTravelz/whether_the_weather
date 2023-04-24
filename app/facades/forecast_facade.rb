@@ -25,6 +25,12 @@ class ForecastFacade
     "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
   end
 
+  def helper_5_days(all_weather_info)
+    all_weather_info[:forecast][:forecastday].map do |forecast_day|
+      forecast_day
+    end
+  end
+
   def helper_current_weather(all_weather_info)
     {
       last_updated: all_weather_info[:current][:last_updated],
@@ -51,12 +57,6 @@ class ForecastFacade
         condition: day[:day][:condition][:text],
         icon: day[:day][:condition][:icon]
       }
-    end
-  end
-
-  def helper_5_days(all_weather_info)
-    all_weather_info[:forecast][:forecastday].map do |forecast_day|
-      forecast_day
     end
   end
 
