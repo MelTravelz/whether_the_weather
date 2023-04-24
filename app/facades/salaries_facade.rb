@@ -16,13 +16,16 @@ class SalariesFacade
       if tech_job == "Data Analyst" || tech_job == "Data Scientist" || tech_job == "Mobile Developer" || tech_job == "QA Engineer" || tech_job == "Software Engineer" || tech_job == "Systems Administrator" || tech_job == "Web Developer"
         {
           title: tech_job,
+            min: "$#{sprintf("%.2f", salary_hash[:salary_percentiles][:percentile_25])}",
+            max: "$#{sprintf("%.2f", salary_hash[:salary_percentiles][:percentile_75])}"
+
+          # Original Code:
+          # min: "$#{(salary_hash[:salary_percentiles][:percentile_25]).truncate(2)}",
+          # max: "$#{(salary_hash[:salary_percentiles][:percentile_75].truncate(2))}"
 
           # Didn't get work back from instructors if I can use this gem:
           # http://vaidehijoshi.github.io/blog/2015/02/10/money-makes-the-world-go-round-using-money-rails-and-bigdecimal/
           # min: Money.new(salary_hash[:salary_percentiles][:percentile_25], "USD").format,
-
-          min: "$#{(salary_hash[:salary_percentiles][:percentile_25]).truncate(2)}",
-          max: "$#{(salary_hash[:salary_percentiles][:percentile_75].truncate(2))}"
         }
       end
     end.compact

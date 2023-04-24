@@ -38,7 +38,6 @@ RSpec.describe "/api/v1/salaries" do
         expect(parsed_data[:data][:attributes][:salaries].first).to be_a(Hash)
         expect(parsed_data[:data][:attributes][:salaries].first.keys).to eq([:title, :min, :max])
       end
-
     end
   end
 end
