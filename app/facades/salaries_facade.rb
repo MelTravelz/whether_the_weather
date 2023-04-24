@@ -16,8 +16,8 @@ class SalariesFacade
       if tech_job == "Data Analyst" || tech_job == "Data Scientist" || tech_job == "Mobile Developer" || tech_job == "QA Engineer" || tech_job == "Software Engineer" || tech_job == "Systems Administrator" || tech_job == "Web Developer"
         {
           title: tech_job,
-          min: salary_hash[:salary_percentiles][:percentile_25],
-          max: salary_hash[:salary_percentiles][:percentile_75] 
+          min: "$#{(salary_hash[:salary_percentiles][:percentile_25]).round(2)}",
+          max: "$#{(salary_hash[:salary_percentiles][:percentile_75].round(2))}"
         }
       end
     end.compact
@@ -35,8 +35,9 @@ class SalariesFacade
       },
       salaries: salaries_array
     }
-require 'pry'; binding.pry
 
+    x = ForecastSalaries.new(new_hash)
+    require 'pry'; binding.pry
   end
 
 end
