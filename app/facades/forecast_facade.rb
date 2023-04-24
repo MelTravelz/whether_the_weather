@@ -8,7 +8,7 @@ class ForecastFacade
   end
 
   def forecast_info(location_coordinates)
-    # coordinates_string = helper_fetch_lat_lng(location_name)
+    # coordinates_string = helper_fetch_lat_lng(location_name) #this was before adding sad path testing
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
@@ -20,7 +20,7 @@ class ForecastFacade
     Forecast.new(new_all_weather_hash)
   end
 
-  ###### Called in Controller ONLY:
+  ###### Called in Controller ONLY (after sad path testing)
   def helper_fetch_lat_lng(location_name)
     info_hash = mapquest_service.fetch_lat_lng(location_name)
     if info_hash[:results].first[:locations].first[:source].present? 
