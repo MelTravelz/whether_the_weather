@@ -34,7 +34,7 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": ["Credentials are incorrect."]
+              "detail": "Credentials are incorrect."
             }]
         }
       }
@@ -102,7 +102,7 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": ["Credentials are incorrect to login."]
+              "detail": "Credentials are incorrect to login."
             }]
         }
       }
@@ -139,7 +139,7 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": ["Credentials cannot be missing."]
+              "detail": "Credentials cannot be missing."
             }]
         }
 

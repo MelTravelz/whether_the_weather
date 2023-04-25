@@ -56,7 +56,7 @@ RSpec.describe "/road_trip" do
         [{
             "status": '404',
             "title": 'Invalid Request',
-            "detail": ["Unauthorized request."]
+            "detail": "Unauthorized request."
           }]
       }
     }
@@ -93,7 +93,7 @@ RSpec.describe "/road_trip" do
         [{
             "status": '404',
             "title": 'Invalid Request',
-            "detail": ["One or more location names are invalid."]
+            "detail": "One or more location names are invalid."
           }]
       }
       hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
