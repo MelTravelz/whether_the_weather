@@ -97,6 +97,58 @@ RSpec.describe "/api/v1/users" do
     end
 
     describe "sad path tests" do
+      let(:expected_hash) { 
+        {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": message
+            }]
+        }
+      }
+      let(:message) { ["Credentials are incorrect to login."] }
+      
+      it "returns error message when password is invalid" do
+        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { email: "RonSchoolEmail@hogwarts.com", password: "ImmaWrongPassword" } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
+
+        expect(response).to have_http_status(404)
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+      end
+
+      it "returns error message when email is invalid" do
+        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!" } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
+
+        expect(response).to have_http_status(404)
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+      end
+
+      it "returns error message when input is nil/missing" do
+        message = ["Credentials cannot be missing."]
+
+        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { email: nil, password: "ImmaWizardtoo!" } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
+
+        expect(response).to have_http_status(404)
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(parsed_data).to be_a(Hash)
+      end
     end
   end
 end
