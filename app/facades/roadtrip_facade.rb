@@ -1,10 +1,10 @@
 class RoadtripFacade
-  attr_reader :mapquest_service #,
-              # :weather_service
+  attr_reader :mapquest_service,
+              :weather_service
 
   def initialize
     @mapquest_service = MapQuestService.new
-    # @weather_service = WeatherService.new
+    @weather_service = WeatherService.new
   end
 
   def fetch_both_lat_lng(from_origin, to_destination)
@@ -31,7 +31,9 @@ class RoadtripFacade
   end
 
   def fetch_direction_weather_info(location_names, location_coords)
-    arrival_times = fetch_direction_times(location_coords)
+    arrival_times = helper_fetch_direction_times(location_coords)
+    all_weather_info = @weather_service.fetch_forecast(location_coords[1])
+    require 'pry'; binding.pry
     #get weather for location & add arrival_times[:seconds_to_arrival]
 
     new_hash = {
@@ -44,13 +46,12 @@ class RoadtripFacade
     # Roadtrip.new(new_hash)
   end
 
-  def fetch_direction_times(location_coords)
+  def helper_fetch_direction_times(location_coords)
     directions_hash = mapquest_service.fetch_directions(location_coords[0], location_coords[1])
     {
       total_travel_time: directions_hash[:route][:formattedTime],
       seconds_to_arrival: directions_hash[:route][:time]
     }
-
     # DateTime.current + 144642.seconds
   end
 

@@ -19,6 +19,10 @@ RSpec.describe ForecastFacade do
       stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
       .to_return(status: 200, body: ny_la_directions, headers: {})
 
+      la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
+      stub_request(:get, "http://api.weatherapi.com/v1/forecast.json?days=5&key=#{ENV["WEATHER_API_KEY"]}&q=34.05357,-118.24545")
+      .to_return(status: 200, body: la_weather_info, headers: {})
+
       @roadtrip_facade = RoadtripFacade.new
     end
 
@@ -60,13 +64,28 @@ RSpec.describe ForecastFacade do
         end
       end
 
-      describe "#fetch_direction_times" do
+      describe "#fetch_direction_weather_info" do 
+        it "returns a RoadTrip object" do
+          all_la_weather_info = @roadtrip_facade.fetch_direction_weather_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
+          
+          expect(all_la_weather_info).to be_a(RoadTrip)
+        end
+      end
+
+      describe "#helper_fetch_direction_times" do
         it "returns all direction instructions" do
-          ny_la_arrival_times = @roadtrip_facade.fetch_direction_times(["40.71453,-74.00712", "34.05357,-118.24545"])
+          ny_la_arrival_times = @roadtrip_facade.helper_fetch_direction_times(["40.71453,-74.00712", "34.05357,-118.24545"])
           expect(ny_la_arrival_times).to be_a(Hash)
           expect(ny_la_arrival_times.keys).to eq([:total_travel_time, :seconds_to_arrival])
         end
       end
+
+      # describe "#helper_fetch_weather????" do
+      #   it "returns weather at eta" do
+      #     # all_la_weather_info = roadtrip_facade.weather_service.fetch_forecast("34.05357,-118.24545")
+      #     # expect(all_la_weather_info).to be_a(Hash)
+      #   end
+      # end
     end 
   end
 end
