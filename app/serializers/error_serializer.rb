@@ -9,7 +9,7 @@ class ErrorSerializer
         {
           "status": '404',
           "title": 'Invalid Request',
-          "detail": [@errors]
+          "detail": @errors
         }
       ]
     }

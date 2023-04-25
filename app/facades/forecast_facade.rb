@@ -8,7 +8,6 @@ class ForecastFacade
   end
 
   def forecast_info(location_coordinates)
-    # coordinates_string = helper_fetch_lat_lng(location_name) #this was before adding sad path testing
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
@@ -31,12 +30,6 @@ class ForecastFacade
   end
   #########
 
-  def helper_5_days(all_weather_info)
-    all_weather_info[:forecast][:forecastday].map do |forecast_day|
-      forecast_day
-    end
-  end
-
   def helper_current_weather(all_weather_info)
     {
       last_updated: all_weather_info[:current][:last_updated],
@@ -53,6 +46,7 @@ class ForecastFacade
   def helper_daily_weather(all_weather_info)
     five_days = helper_5_days(all_weather_info)
 
+    # possible? all_weather_info.first(5).map do |day|
     five_days.map do |day|
       {
         date: day[:date],
@@ -63,6 +57,12 @@ class ForecastFacade
         condition: day[:day][:condition][:text],
         icon: day[:day][:condition][:icon]
       }
+    end
+  end
+
+  def helper_5_days(all_weather_info)
+    all_weather_info[:forecast][:forecastday].map do |forecast_day|
+      forecast_day
     end
   end
 

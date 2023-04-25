@@ -8,15 +8,14 @@ RSpec.describe User, type: :model do
     
     it { should have_secure_password }
     
-    # before bcrypt: 
-    # it { should validate_presence_of(:password_digest) }
+    # before bcrypt: it { should validate_presence_of(:password_digest) }
   end
 
   it "can create a user" do
     # before bcrypt:
-    # harry = User.create(email: "harry@hogwarts.com", password_digest: "ImmaWizard!")
-    # expect(harry).to have_attribute(:email)
-    # expect(harry).to have_attribute(:password_digest)
+      # harry = User.create(email: "harry@hogwarts.com", password_digest: "ImmaWizard!")
+      # expect(harry).to have_attribute(:email)
+      # expect(harry).to have_attribute(:password_digest)
     
     harry = User.create(email: "harry@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!")
     expect(harry).to have_attribute(:email) 

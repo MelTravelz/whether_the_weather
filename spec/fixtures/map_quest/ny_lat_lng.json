@@ -15,23 +15,23 @@
   "results": [
       {
           "providedLocation": {
-              "location": "Rowswell, NM"
+              "location": "newyork,ny"
           },
           "locations": [
               {
                   "street": "",
                   "adminArea6": "",
                   "adminArea6Type": "Neighborhood",
-                  "adminArea5": "Roswell",
+                  "adminArea5": "New York",
                   "adminArea5Type": "City",
-                  "adminArea4": "Chaves",
+                  "adminArea4": "New York",
                   "adminArea4Type": "County",
-                  "adminArea3": "NM",
+                  "adminArea3": "NY",
                   "adminArea3Type": "State",
                   "adminArea1": "US",
                   "adminArea1Type": "Country",
                   "postalCode": "",
-                  "geocodeQualityCode": "A5XBX",
+                  "geocodeQualityCode": "A5XAX",
                   "geocodeQuality": "CITY",
                   "dragPoint": false,
                   "sideOfStreet": "N",
@@ -39,12 +39,12 @@
                   "unknownInput": "",
                   "type": "s",
                   "latLng": {
-                      "lat": 33.39509,
-                      "lng": -104.52275
+                      "lat": 40.71453,
+                      "lng": -74.00712
                   },
                   "displayLatLng": {
-                      "lat": 33.39509,
-                      "lng": -104.52275
+                      "lat": 40.71453,
+                      "lng": -74.00712
                   },
                   "mapUrl": ""
               }

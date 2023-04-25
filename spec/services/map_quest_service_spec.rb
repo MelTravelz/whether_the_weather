@@ -4,11 +4,11 @@ RSpec.describe MapQuestService do
   describe "instance methods" do
     context "#fetch_lat_lng" do
       it "returns json object" do
-        roswell_lat_lng = File.read("spec/fixtures/map_quest/roswell_lat_lng.json")
-        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=Roswell,%20NM")
-        .to_return(status: 200, body: roswell_lat_lng, headers: {})
+        ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
+        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
+        .to_return(status: 200, body: ny_lat_lng, headers: {})
 
-        response = MapQuestService.new.fetch_lat_lng("Roswell, NM")
+        response = MapQuestService.new.fetch_lat_lng("newyork,ny")
         keys = %i[info options results]
 
         expect(response).to be_a(Hash)
@@ -18,13 +18,13 @@ RSpec.describe MapQuestService do
 
     context "#fetch_directions" do
       it "returns json object" do
-        roswell_la_directions = File.read("spec/fixtures/map_quest/roswell_la_directions.json")
-        stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=33.39509,-104.52275&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
-        .to_return(status: 200, body: roswell_la_directions, headers: {})
+        ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
+        stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
+        .to_return(status: 200, body: ny_la_directions, headers: {})
 
-        # Roswell, NM coordinates = 33.39509,-104.52275
+        # New York, NY coordinates = 40.71453,-74.00712
         # Los Angeles, CA coordinates = 34.05357,-118.24545
-        response = MapQuestService.new.fetch_directions("33.39509,-104.52275", "34.05357,-118.24545")
+        response = MapQuestService.new.fetch_directions("40.71453,-74.00712", "34.05357,-118.24545")
         keys = %i[route info]
 
         expect(response).to be_a(Hash)

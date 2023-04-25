@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "/api/v1/users" do
+  # For testing real endpoint connection: 
+    # before do
+    #   WebMock.allow_net_connect!
+    # end
+    # after do
+    #   WebMock.disable_net_connect!
+    # end
+
   describe "#create" do
     describe "happy path tests" do
       let(:user_params) { { email: "DumbledoreSchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!" } }
@@ -9,7 +17,6 @@ RSpec.describe "/api/v1/users" do
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
-        # expect(response).to be_successful
         expect(response).to have_http_status(201)
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)
@@ -20,11 +27,11 @@ RSpec.describe "/api/v1/users" do
 
         expect(parsed_data[:data][:id]).to be_a(String)
         expect(parsed_data[:data][:type]).to eq("users")
-        expect(parsed_data[:data][:type]).to eq("users")
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
         expect(parsed_data[:data][:attributes][:email]).to eq("dumbledoreschoolemail@hogwarts.com")
         expect(parsed_data[:data][:attributes][:api_key]).to be_a(String)
+        expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
     end
 
@@ -35,7 +42,7 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": ["Credentials are incorrect."]
+              "detail": "Credentials are incorrect."
             }]
         }
       }
@@ -93,6 +100,8 @@ RSpec.describe "/api/v1/users" do
         expect(parsed_data[:data][:type]).to eq("users")
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
+        expect(parsed_data[:data][:attributes][:email]).to eq("ronschoolemail@hogwarts.com")
+        expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
     end
 
@@ -103,11 +112,10 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": message
+              "detail": "Credentials are incorrect to login."
             }]
         }
       }
-      let(:message) { ["Credentials are incorrect to login."] }
       
       it "returns error message when password is invalid" do
         ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
@@ -119,7 +127,7 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
 
       it "returns error message when email is invalid" do
@@ -132,13 +140,19 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
 
       it "returns error message when input is nil/missing" do
-        message = ["Credentials cannot be missing."]
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": "Credentials cannot be missing."
+            }]
+        }
 
-        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { email: nil, password: "ImmaWizardtoo!" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
@@ -147,7 +161,7 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
     end
   end

@@ -7,10 +7,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     new_params = user_params
     new_params[:email] = new_params[:email].downcase
-    new_user = User.new(email: new_params[:email], password: params[:password])  
+    new_user = User.new(email: new_params[:email], password: user_params[:password], api_key: SecureRandom.hex)  
 
     if new_user && new_user.save 
-      new_user.update(api_key: SecureRandom.hex)
       # Refactor: add sessions
       # session[:id] = new_user.id
       render json: UsersSerializer.new(new_user), status: 201
@@ -20,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    if @returning_user && @returning_user.authenticate(params[:password]) 
+    if @returning_user && @returning_user.authenticate(user_params[:password]) 
       # Refactor: add session:
       # session[:id] = returning_user.id
       render json: UsersSerializer.new(@returning_user), status: 200
@@ -31,13 +30,13 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def check_credentials_create
-    if params[:email].nil? || params[:password].nil? || params[:password_confirmation].nil? || params[:password] != params[:password_confirmation] || User.find_by(email: params[:email].downcase)
+    if user_params[:email].nil? || user_params[:password].nil? || user_params[:password_confirmation].nil? || user_params[:password] != user_params[:password_confirmation] || User.find_by(email: user_params[:email].downcase)
       render json: ErrorSerializer.new("Credentials are incorrect.").invalid_request, status: 404
     end
   end
 
   def check_credentials_login
-    if params[:email].nil? || params[:password].nil?
+    if user_params[:email].nil? || user_params[:password].nil?
       render json: ErrorSerializer.new("Credentials cannot be missing.").invalid_request, status: 404
     end
   end
@@ -48,11 +47,11 @@ class Api::V1::UsersController < ApplicationController
       @returning_user = User.find_by(email: new_params[:email])
 
     if @returning_user == nil 
-      render json: ErrorSerializer.new("Credentials are incorrect.").invalid_request, status: 404
+      render json: ErrorSerializer.new("Credentials are incorrect to login.").invalid_request, status: 404
     end
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.permit(:email, :password, :password_confirmation)
   end
 end
