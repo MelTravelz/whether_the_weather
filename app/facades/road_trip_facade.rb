@@ -1,4 +1,4 @@
-class RoadtripFacade
+class RoadTripFacade
   attr_reader :mapquest_service,
               :weather_service
 
@@ -30,7 +30,7 @@ class RoadtripFacade
     end.compact
   end
 
-  def fetch_roadtrip_info(location_names, location_coords)
+  def fetch_road_trip_info(location_names, location_coords)
     arrival_times = helper_fetch_direction_times(location_coords)
     all_weather_info = @weather_service.fetch_forecast(location_coords[1])
 
@@ -56,7 +56,7 @@ class RoadtripFacade
       }
     }
 
-    Roadtrip.new(new_hash)
+    RoadTrip.new(new_hash)
   end
 
   def helper_fetch_direction_times(location_coords)
