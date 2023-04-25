@@ -8,7 +8,7 @@ class ForecastFacade
   end
 
   def forecast_info(location_coordinates)
-    # coordinates_string = helper_fetch_lat_lng(location_name) #this was before adding sad path testing
+    # before sad path testing, this was here: coordinates_string = helper_fetch_lat_lng(location_name) 
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
