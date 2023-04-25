@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
       post "/users", to: "users#create"
 
+      post "/road_trip", to: "roadtrip#index"
+
       # unRESTful route:
       post "/sessions", to: "users#login"
     end

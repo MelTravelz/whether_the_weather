@@ -37,6 +37,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def check_credentials_login
+    # require 'pry'; binding.pry
     if params[:email].nil? || params[:password].nil?
       render json: ErrorSerializer.new("Credentials cannot be missing.").invalid_request, status: 404
     end
@@ -48,7 +49,7 @@ class Api::V1::UsersController < ApplicationController
       @returning_user = User.find_by(email: new_params[:email])
 
     if @returning_user == nil 
-      render json: ErrorSerializer.new("Credentials are incorrect.").invalid_request, status: 404
+      render json: ErrorSerializer.new("Credentials are incorrect to login.").invalid_request, status: 404
     end
   end
 

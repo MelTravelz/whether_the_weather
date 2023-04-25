@@ -103,11 +103,10 @@ RSpec.describe "/api/v1/users" do
           [{
               "status": '404',
               "title": 'Invalid Request',
-              "detail": message
+              "detail": ["Credentials are incorrect to login."]
             }]
         }
       }
-      let(:message) { ["Credentials are incorrect to login."] }
       
       it "returns error message when password is invalid" do
         ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
@@ -119,7 +118,7 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
 
       it "returns error message when email is invalid" do
@@ -132,13 +131,19 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
 
       it "returns error message when input is nil/missing" do
-        message = ["Credentials cannot be missing."]
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": ["Credentials cannot be missing."]
+            }]
+        }
 
-        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { email: nil, password: "ImmaWizardtoo!" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
@@ -147,7 +152,7 @@ RSpec.describe "/api/v1/users" do
         expect(response).to have_http_status(404)
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
-        expect(parsed_data).to be_a(Hash)
+        expect(parsed_data).to eq(expected_hash)
       end
     end
   end
