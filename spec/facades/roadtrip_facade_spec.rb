@@ -65,10 +65,15 @@ RSpec.describe ForecastFacade do
       end
 
       describe "#fetch_direction_weather_info" do 
-        it "returns a RoadTrip object" do
-          all_la_weather_info = @roadtrip_facade.fetch_direction_weather_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
+        it "returns a Roadtrip object" do
+          road_trip_info = @roadtrip_facade.fetch_direction_weather_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
           
-          expect(all_la_weather_info).to be_a(RoadTrip)
+          expect(road_trip_info).to be_a(Roadtrip)
+          expect(road_trip_info.start_city).to be_a(String)
+          expect(road_trip_info.end_city).to be_a(String)
+          expect(road_trip_info.travel_time).to be_a(String)
+          expect(road_trip_info.weather_at_eta).to be_a(Hash)
+          expect(road_trip_info.weather_at_eta.keys).to eq([:datetime, :temperature, :condition])
         end
       end
 
@@ -80,10 +85,12 @@ RSpec.describe ForecastFacade do
         end
       end
 
-      # describe "#helper_fetch_weather????" do
+      # describe "#helper_arrival_forecast" do
       #   it "returns weather at eta" do
-      #     # all_la_weather_info = roadtrip_facade.weather_service.fetch_forecast("34.05357,-118.24545")
-      #     # expect(all_la_weather_info).to be_a(Hash)
+      #     # NY to LA travel time in seconds = 144642
+      #     la_arrival_forecast = @roadtrip_facade.helper_arrival_forecast(144642)
+      #     expect(la_arrival_forecast).to be_a(Hash)
+      #     require 'pry'; binding.pry
       #   end
       # end
     end 
