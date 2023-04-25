@@ -18,9 +18,10 @@ RSpec.describe Roadtrip, type: :model do
   describe "instance methods" do
     context "#initialize" do
       it "exists & has attributes" do
-        school_roadtrip = RoadTrip.new(school_trip)
-        
+        school_roadtrip = Roadtrip.new(school_trip)
+
         expect(school_roadtrip).to be_a(Roadtrip)
+        expect(school_roadtrip.id).to eq(nil)
         expect(school_roadtrip.start_city).to eq("Hogwarts, UK")
         expect(school_roadtrip.end_city).to eq("Stonehenge, UK")
         expect(school_roadtrip.travel_time).to eq("01:00:45")
