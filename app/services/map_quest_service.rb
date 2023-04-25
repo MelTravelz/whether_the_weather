@@ -1,6 +1,7 @@
 class MapQuestService
   def fetch_lat_lng(location_name)
     response = conn.get("geocoding/v1/address") do |faraday|
+      # require 'pry'; binding.pry
       faraday.params["location"] = location_name
     end
     JSON.parse(response.body, symbolize_names: true)
