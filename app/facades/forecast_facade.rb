@@ -44,10 +44,8 @@ class ForecastFacade
   end
 
   def helper_daily_weather(all_weather_info)
-    five_days = helper_5_days(all_weather_info)
 
-    # possible? all_weather_info.first(5).map do |day|
-    five_days.map do |day|
+    all_weather_info[:forecast][:forecastday].first(5).map do |day|
       {
         date: day[:date],
         sunrise: day[:astro][:sunrise],
@@ -57,12 +55,6 @@ class ForecastFacade
         condition: day[:day][:condition][:text],
         icon: day[:day][:condition][:icon]
       }
-    end
-  end
-
-  def helper_5_days(all_weather_info)
-    all_weather_info[:forecast][:forecastday].map do |forecast_day|
-      forecast_day
     end
   end
 

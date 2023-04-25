@@ -68,30 +68,6 @@ RSpec.describe ForecastFacade do
         end
       end
 
-      describe "#heler_5_days" do
-        it "returns an array of 5 hashes of weather forecast days" do
-          # Los Angeles, CA coordinates = 34.05357,-118.24545
-          weather_service = @forecast_facade.weather_service
-          all_weather_info = weather_service.fetch_forecast("34.05357,-118.24545")
-          five_days = @forecast_facade.helper_5_days(all_weather_info)
-
-          expect(five_days).to be_an(Array)
-          expect(five_days.count).to eq(5)
-          expect(five_days.first).to be_a(Hash)
-          expect(five_days.first.keys).to eq([:date, :date_epoch, :day, :astro, :hour])
-
-          expect(five_days.first[:day]).to be_a(Hash)
-          expect(five_days.first[:day].keys.count).to eq(20)
-
-          expect(five_days.first[:astro]).to be_a(Hash)
-          expect(five_days.first[:astro].keys.count).to eq(6)
-
-          expect(five_days.first[:hour]).to be_an(Array)
-          expect(five_days.first[:hour].first).to be_a(Hash)
-          expect(five_days.first[:hour].first.keys.count).to eq(33)
-        end
-      end
-
       describe "#helper_current_weather" do
         it "returns a hash with 8 attributes" do
           # Los Angeles, CA coordinates = 34.05357,-118.24545
