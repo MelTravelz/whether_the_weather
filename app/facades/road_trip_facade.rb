@@ -36,9 +36,11 @@ class RoadTripFacade
 
     ### (see note below) helper_arrival_forecast(all_weather_info, arrival_times[:seconds_to_arrival])
       arrival_day_time = (Time.now + arrival_times[:seconds_to_arrival].seconds)
+
       arrival_day_forecast = all_weather_info[:forecast][:forecastday].find do |day_hash|
         day_hash[:date] == arrival_day_time.to_s[0, 10]
       end
+
       arrival_hour_forecast = arrival_day_forecast[:hour].find do |hour_hash|
         hour_hash[:time] == arrival_day_time.to_s[0, 14] + "00"
       end

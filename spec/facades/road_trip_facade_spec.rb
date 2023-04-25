@@ -2,13 +2,13 @@ require "rails_helper"
 
 RSpec.describe RoadTripFacade do
   describe "intance methods" do
-    # For testing real endpoint connection: 
-      # before do
-      #   WebMock.allow_net_connect!
-      # end
-      # after do
-      #   WebMock.disable_net_connect!
-      # end
+    # always leave this on (it uses Time.now):
+      before do
+        WebMock.allow_net_connect!
+      end
+      after do
+        WebMock.disable_net_connect!
+      end
 
     before(:each) do
       ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
@@ -94,15 +94,6 @@ RSpec.describe RoadTripFacade do
           expect(ny_la_arrival_times.keys).to eq([:total_travel_time, :seconds_to_arrival])
         end
       end
-
-      # describe "#helper_arrival_forecast" do
-      #   it "returns weather at eta" do
-      #     # NY to LA travel time in seconds = 144642
-      #     la_arrival_forecast = @road_trip_facade.helper_arrival_forecast(144642)
-      #     expect(la_arrival_forecast).to be_a(Hash)
-      #     require 'pry'; binding.pry
-      #   end
-      # end
     end 
   end
 end

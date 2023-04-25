@@ -31,6 +31,7 @@ RSpec.describe "/api/v1/users" do
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
         expect(parsed_data[:data][:attributes][:email]).to eq("dumbledoreschoolemail@hogwarts.com")
         expect(parsed_data[:data][:attributes][:api_key]).to be_a(String)
+        expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
     end
 
@@ -99,6 +100,8 @@ RSpec.describe "/api/v1/users" do
         expect(parsed_data[:data][:type]).to eq("users")
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
+        expect(parsed_data[:data][:attributes][:email]).to eq("ronschoolemail@hogwarts.com")
+        expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
     end
 

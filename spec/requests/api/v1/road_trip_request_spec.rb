@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe "/road_trip" do
-  # For testing real endpoint connection: 
-    # before do
-    #   WebMock.allow_net_connect!
-    # end
-    # after do
-    #   WebMock.disable_net_connect!
-    # end
+  # always leave this on (it uses Time.now): 
+    before do
+      WebMock.allow_net_connect!
+    end
+    after do
+      WebMock.disable_net_connect!
+    end
 
   describe "#index" do
     before(:each) do
