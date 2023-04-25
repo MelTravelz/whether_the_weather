@@ -1,52 +1,52 @@
 require "rails_helper"
 
 RSpec.describe Forecast, type: :model do
-  let(:la_forecast_selected_info) {
+  let(:hogwarts_forecast_info) {
     { 
       current_weather: 
         {
-          last_updated: "2023-04-22 17:00",  
-          temperature: 79, 
-          feels_like: 77.4, 
-          humidity: 36, 
+          last_updated: "2023-01-01 17:00",  
+          temperature: 31, 
+          feels_like: 0.4, 
+          humidity: 55, 
           uvi: 7, 
           visibility: 9, 
-          condition: "Sunny", 
-          icon: "//cdn.weatherapi.com/weather/64x64/day/113.png"
+          condition: "Stormy", 
+          icon: "/watchtower/weather.png"
         },
       daily_weather: 
       [
         {
-        date: "2023-04-22", 
+        date: "2023-01-02", 
         sunrise: "06:13 AM", 
         sunset: "07:30 PM", 
-        max_temp: 86.7, 
-        min_temp: 64, 
-        condition: "Sunny", 
-        icon: "//cdn.weatherapi.com/weather/64x64/day/113.png"
+        max_temp: 100, 
+        min_temp: 32, 
+        condition: "Still Stormy", 
+        icon: "/quidditch_pitch/weather.png"
         },
         {
-        date: "2023-04-26", 
+        date: "2023-01-03", 
         sunrise: "06:09 AM", 
         sunset: "07:33 PM", 
-        max_temp: 81.7, 
-        min_temp: 58.8, 
-        condition: "Sunny", 
-        icon: "//cdn.weatherapi.com/weather/64x64/day/113.png"
+        max_temp: 99, 
+        min_temp: 2, 
+        condition: "Even More Stormy", 
+        icon: "/forbidden_forest/weather.png"
         }
       ],
       hourly_weather: [
         {
         time: "00:00", 
-        temperature: 69.8, 
-        conditions: "Clear", 
-        icon: "//cdn.weatherapi.com/weather/64x64/night/113.png"
+        temperature: 25, 
+        conditions: "Super Clear from some Strange Reason?", 
+        icon: "/owlery/weather.png"
         },
         {
         time: "23:00", 
-        temperature: 69.8, 
-        conditions: "Clear", 
-        icon: "//cdn.weatherapi.com/weather/64x64/night/113.png"
+        temperature: 20, 
+        conditions: "Super Stormy", 
+        icon: "/great_lake/weather.png"
         }
       ]
     }
@@ -55,18 +55,38 @@ RSpec.describe Forecast, type: :model do
   describe "insatance methods" do
     context "#initialize" do
       it "exists & has attributes" do
-        la_forecast = Forecast.new(la_forecast_selected_info)
+        hogwarts_forecast = Forecast.new(hogwarts_forecast_info)
 
-        expect(la_forecast).to be_a(Forecast)
-        expect(la_forecast.id).to eq(nil)
-        expect(la_forecast.current_weather).to be_a(Hash)
-        expect(la_forecast.current_weather.keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :condition, :icon])
+        expect(hogwarts_forecast).to be_a(Forecast)
+        expect(hogwarts_forecast.id).to eq(nil)
 
-        expect(la_forecast.daily_weather).to be_an(Array)
-        expect(la_forecast.daily_weather.first.keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :condition, :icon])
+        expect(hogwarts_forecast.current_weather).to be_a(Hash)
+        expect(hogwarts_forecast.current_weather.keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :condition, :icon])
+        expect(hogwarts_forecast.current_weather[:last_updated]).to eq("2023-01-01 17:00")
+        expect(hogwarts_forecast.current_weather[:temperature]).to eq(31)
+        expect(hogwarts_forecast.current_weather[:feels_like]).to eq(0.4)
+        expect(hogwarts_forecast.current_weather[:humidity]).to eq(55)
+        expect(hogwarts_forecast.current_weather[:uvi]).to eq(7)
+        expect(hogwarts_forecast.current_weather[:visibility]).to eq(9)
+        expect(hogwarts_forecast.current_weather[:condition]).to eq("Stormy")
+        expect(hogwarts_forecast.current_weather[:icon]).to eq("/watchtower/weather.png")
 
-        expect(la_forecast.hourly_weather).to be_an(Array)
-        expect(la_forecast.hourly_weather.first.keys).to eq([:time, :temperature, :conditions, :icon])
+        expect(hogwarts_forecast.daily_weather).to be_an(Array)
+        expect(hogwarts_forecast.daily_weather.first.keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :condition, :icon])
+        expect(hogwarts_forecast.daily_weather.first[:date]).to eq("2023-01-02")
+        expect(hogwarts_forecast.daily_weather.first[:sunrise]).to eq("06:13 AM")
+        expect(hogwarts_forecast.daily_weather.first[:sunset]).to eq("07:30 PM")
+        expect(hogwarts_forecast.daily_weather.first[:max_temp]).to eq(100)
+        expect(hogwarts_forecast.daily_weather.first[:min_temp]).to eq(32)
+        expect(hogwarts_forecast.daily_weather.first[:condition]).to eq("Still Stormy")
+        expect(hogwarts_forecast.daily_weather.first[:icon]).to eq("/quidditch_pitch/weather.png")
+
+        expect(hogwarts_forecast.hourly_weather).to be_an(Array)
+        expect(hogwarts_forecast.hourly_weather.first.keys).to eq([:time, :temperature, :conditions, :icon])
+        expect(hogwarts_forecast.hourly_weather.first[:time]).to eq("00:00")
+        expect(hogwarts_forecast.hourly_weather.first[:temperature]).to eq(25)
+        expect(hogwarts_forecast.hourly_weather.first[:conditions]).to eq("Super Clear from some Strange Reason?")
+        expect(hogwarts_forecast.hourly_weather.first[:icon]).to eq("/owlery/weather.png")
       end
     end
   end

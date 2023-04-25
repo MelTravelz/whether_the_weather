@@ -2,12 +2,13 @@ require "rails_helper"
 
 RSpec.describe ForecastFacade do
   describe "intance methods" do
-    # before do
-    #   WebMock.allow_net_connect!
-    # end
-    # after do
-    #   WebMock.disable_net_connect!
-    # end
+    # For testing real endpoint connection: 
+      # before do
+      #   WebMock.allow_net_connect!
+      # end
+      # after do
+      #   WebMock.disable_net_connect!
+      # end
 
     describe "happy path tests" do
       before(:each) do
@@ -69,7 +70,7 @@ RSpec.describe ForecastFacade do
 
       describe "#heler_5_days" do
         it "returns an array of 5 hashes of weather forecast days" do
-           # Los Angeles, CA coordinates = 34.05357,-118.24545
+          # Los Angeles, CA coordinates = 34.05357,-118.24545
           weather_service = @forecast_facade.weather_service
           all_weather_info = weather_service.fetch_forecast("34.05357,-118.24545")
           five_days = @forecast_facade.helper_5_days(all_weather_info)
@@ -78,9 +79,6 @@ RSpec.describe ForecastFacade do
           expect(five_days.count).to eq(5)
           expect(five_days.first).to be_a(Hash)
           expect(five_days.first.keys).to eq([:date, :date_epoch, :day, :astro, :hour])
-
-          # expect(five_days.first[:date]).to eq("2023-04-22")
-          # expect(five_days.first[:date_epoch]).to eq(1682121600)
 
           expect(five_days.first[:day]).to be_a(Hash)
           expect(five_days.first[:day].keys.count).to eq(20)
@@ -96,7 +94,7 @@ RSpec.describe ForecastFacade do
 
       describe "#helper_current_weather" do
         it "returns a hash with 8 attributes" do
-           # Los Angeles, CA coordinates = 34.05357,-118.24545
+          # Los Angeles, CA coordinates = 34.05357,-118.24545
           weather_service = @forecast_facade.weather_service
           all_weather_info = weather_service.fetch_forecast("34.05357,-118.24545")
           current_weather = @forecast_facade.helper_current_weather(all_weather_info)
@@ -108,7 +106,7 @@ RSpec.describe ForecastFacade do
 
       context "#helper_daily_weather" do
         it "returns an array of hashes with 7 attributes" do
-           # Los Angeles, CA coordinates = 34.05357,-118.24545
+          # Los Angeles, CA coordinates = 34.05357,-118.24545
           weather_service = @forecast_facade.weather_service
           all_weather_info = weather_service.fetch_forecast("34.05357,-118.24545")
           daily_weather = @forecast_facade.helper_daily_weather(all_weather_info)
@@ -121,7 +119,7 @@ RSpec.describe ForecastFacade do
       
       context "#helper_hourly_weather" do
         it "returns an array of hashes with 4 attributes" do
-           # Los Angeles, CA coordinates = 34.05357,-118.24545
+          # Los Angeles, CA coordinates = 34.05357,-118.24545
           weather_service = @forecast_facade.weather_service
           all_weather_info = weather_service.fetch_forecast("34.05357,-118.24545")
           hourly_weather = @forecast_facade.helper_hourly_weather(all_weather_info)

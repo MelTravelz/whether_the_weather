@@ -2,6 +2,14 @@ require "rails_helper"
 
 RSpec.describe RoadTripFacade do
   describe "intance methods" do
+    # For testing real endpoint connection: 
+      # before do
+      #   WebMock.allow_net_connect!
+      # end
+      # after do
+      #   WebMock.disable_net_connect!
+      # end
+
     before(:each) do
       ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
       stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
@@ -31,7 +39,7 @@ RSpec.describe RoadTripFacade do
         it "exists and creates an instance of mapquest service" do
           expect(@road_trip_facade).to be_a(RoadTripFacade)
           expect(@road_trip_facade.mapquest_service).to be_a(MapQuestService)
-          # expect(@road_trip_facade.weather_service).to be_a(WeatherService)
+          expect(@road_trip_facade.weather_service).to be_a(WeatherService)
         end
       end
 
@@ -79,6 +87,8 @@ RSpec.describe RoadTripFacade do
 
       describe "#helper_fetch_direction_times" do
         it "returns all direction instructions" do
+          # New York, NY coordinates = 40.71453,-74.00712
+          # Los Angeles, CA coordinates = 34.05357,-118.24545
           ny_la_arrival_times = @road_trip_facade.helper_fetch_direction_times(["40.71453,-74.00712", "34.05357,-118.24545"])
           expect(ny_la_arrival_times).to be_a(Hash)
           expect(ny_la_arrival_times.keys).to eq([:total_travel_time, :seconds_to_arrival])

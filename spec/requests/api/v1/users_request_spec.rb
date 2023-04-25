@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "/api/v1/users" do
+  # For testing real endpoint connection: 
+    # before do
+    #   WebMock.allow_net_connect!
+    # end
+    # after do
+    #   WebMock.disable_net_connect!
+    # end
+
   describe "#create" do
     describe "happy path tests" do
       let(:user_params) { { email: "DumbledoreSchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!" } }
@@ -9,7 +17,6 @@ RSpec.describe "/api/v1/users" do
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
-        # expect(response).to be_successful
         expect(response).to have_http_status(201)
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)

@@ -34,7 +34,7 @@ class RoadTripFacade
     arrival_times = helper_fetch_direction_times(location_coords)
     all_weather_info = @weather_service.fetch_forecast(location_coords[1])
 
-    # (see note below) helper_arrival_forecast(all_weather_info, arrival_times[:seconds_to_arrival])
+    ### (see note below) helper_arrival_forecast(all_weather_info, arrival_times[:seconds_to_arrival])
       arrival_day_time = (Time.now + arrival_times[:seconds_to_arrival].seconds)
       arrival_day_forecast = all_weather_info[:forecast][:forecastday].find do |day_hash|
         day_hash[:date] == arrival_day_time.to_s[0, 10]
@@ -42,7 +42,7 @@ class RoadTripFacade
       arrival_hour_forecast = arrival_day_forecast[:hour].find do |hour_hash|
         hour_hash[:time] == arrival_day_time.to_s[0, 14] + "00"
       end
-    ## code above should be a helper method (see note below)
+    ### code above should be a helper method (see note below)
 
     new_hash = {
       start_city: location_names[0],

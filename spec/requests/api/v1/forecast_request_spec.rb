@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe "/api/v1/forecast" do
+  # For testing real endpoint connection: 
+    # before do
+    #   WebMock.allow_net_connect!
+    # end
+    # after do
+    #   WebMock.disable_net_connect!
+    # end
+
   describe "#index" do
     describe "happy path tests" do
       before(:each) do
@@ -17,7 +25,7 @@ RSpec.describe "/api/v1/forecast" do
         get '/api/v1/forecast?location=losangeles,ca'
       
         parsed_data = JSON.parse(response.body, symbolize_names: true)
-        # expect(response).to be_successful
+        
         expect(response).to have_http_status(200)
 
         expect(parsed_data).to be_a(Hash)
