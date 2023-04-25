@@ -16,7 +16,6 @@ class RoadtripFacade
     end
   end
 
-
   def helper_fetch_both_lat_lng(from_origin, to_destination)
     location_array = [from_origin, to_destination]
 
@@ -31,16 +30,28 @@ class RoadtripFacade
     end.compact
   end
 
-    ###### 
-    # def helper_fetch_lat_lng(location_name)
-    #   info_hash = mapquest_service.fetch_lat_lng(location_name)
-    #   if info_hash[:results].first[:locations].first[:source].present? 
-    #     return "invalid location name"
-    #   else
-    #     "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
-    #   end
-    # end
-    #########
+  def fetch_direction_weather_info(location_names, location_coords)
+    arrival_times = fetch_direction_times(location_coords)
+    #get weather for location & add arrival_times[:seconds_to_arrival]
 
+    new_hash = {
+      start_city: location_names[0],
+      end_city: location_names[1],
+      travel_time: arrival_times[:total_travel_time],
+      # weather_at_eta: {}
+    }
+
+    # Roadtrip.new(new_hash)
+  end
+
+  def fetch_direction_times(location_coords)
+    directions_hash = mapquest_service.fetch_directions(location_coords[0], location_coords[1])
+    {
+      total_travel_time: directions_hash[:route][:formattedTime],
+      seconds_to_arrival: directions_hash[:route][:time]
+    }
+
+    # DateTime.current + 144642.seconds
+  end
 
 end

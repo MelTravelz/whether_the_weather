@@ -2,27 +2,27 @@ require "rails_helper"
 
 RSpec.describe ForecastFacade do
   describe "intance methods" do
+    before(:each) do
+      ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
+      .to_return(status: 200, body: ny_lat_lng, headers: {})
+
+      la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
+      .to_return(status: 200, body: la_lat_lng, headers: {})
+
+      xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
+      .to_return(status: 200, body: xyz_abc, headers: {})
+
+      ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
+      stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
+      .to_return(status: 200, body: ny_la_directions, headers: {})
+
+      @roadtrip_facade = RoadtripFacade.new
+    end
+
     describe "happy path tests" do
-      before(:each) do
-        ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
-        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
-        .to_return(status: 200, body: ny_lat_lng, headers: {})
-
-        la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
-        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
-        .to_return(status: 200, body: la_lat_lng, headers: {})
-
-        xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
-        stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
-        .to_return(status: 200, body: xyz_abc, headers: {})
-
-        ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
-        stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
-        .to_return(status: 200, body: ny_la_directions, headers: {})
-
-        @roadtrip_facade = RoadtripFacade.new
-      end
-
       describe "#initialize" do
         it "exists and creates an instance of mapquest service" do
           expect(@roadtrip_facade).to be_a(RoadtripFacade)
@@ -57,6 +57,14 @@ RSpec.describe ForecastFacade do
         it "returns an error message when one or more location names are invalid" do
           error_message = @roadtrip_facade.fetch_both_lat_lng("New York, NY", "xyz,abc")
           expect(error_message).to eq("one or more invalid location names")
+        end
+      end
+
+      describe "#fetch_direction_times" do
+        it "returns all direction instructions" do
+          ny_la_arrival_times = @roadtrip_facade.fetch_direction_times(["40.71453,-74.00712", "34.05357,-118.24545"])
+          expect(ny_la_arrival_times).to be_a(Hash)
+          expect(ny_la_arrival_times.keys).to eq([:total_travel_time, :seconds_to_arrival])
         end
       end
     end 
