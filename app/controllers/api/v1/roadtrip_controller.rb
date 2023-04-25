@@ -9,8 +9,8 @@ class Api::V1::RoadtripController < ApplicationController
       render json: ErrorSerializer.new("One or more location names are invalid.").invalid_request, status: 404
     else
       location_names = [roadtrip_params[:origin], roadtrip_params[:destination]]
-      all_direction_weather_info = roadtrip_facade.fetch_direction_weather_info(location_names, location_coordinates)
-      render json: RoadtripSerializer.new(all_direction_weather_info)
+      all_roadtrip_info = roadtrip_facade.fetch_roadtrip_info(location_names, location_coordinates)
+      render json: RoadTripSerializer.new(all_roadtrip_info)
     end
   end
 

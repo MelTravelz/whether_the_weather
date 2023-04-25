@@ -64,9 +64,9 @@ RSpec.describe ForecastFacade do
         end
       end
 
-      describe "#fetch_direction_weather_info" do 
+      describe "#fetch_roadtrip_info" do 
         it "returns a Roadtrip object" do
-          road_trip_info = @roadtrip_facade.fetch_direction_weather_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
+          road_trip_info = @roadtrip_facade.fetch_roadtrip_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
           
           expect(road_trip_info).to be_a(Roadtrip)
           expect(road_trip_info.start_city).to be_a(String)

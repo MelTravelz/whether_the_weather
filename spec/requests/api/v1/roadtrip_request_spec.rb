@@ -34,7 +34,18 @@ RSpec.describe "/road_trip" do
       parsed_data = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to have_http_status(200)
+      
       expect(parsed_data).to be_a(Hash)
+      expect(parsed_data.keys).to eq([:data])
+      expect(parsed_data[:data]).to be_a(Hash)
+      expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+
+      expect(parsed_data[:data][:id]).to eq(nil)
+      expect(parsed_data[:data][:type]).to eq("road_trip")
+      expect(parsed_data[:data][:attributes]).to be_a(Hash)
+      expect(parsed_data[:data][:attributes].keys).to eq([:start_city, :end_city, :travel_time, :weather_at_eta])
+      expect(parsed_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
+      expect(parsed_data[:data][:attributes][:weather_at_eta].keys).to eq([:datetime, :temperature, :condition])
     end
   end
 
