@@ -2,8 +2,6 @@ class Api::V1::RoadtripController < ApplicationController
   before_action :check_user_credentials, only: [:index]
 
   def index
-    require 'pry'; binding.pry
-
     roadtrip_facade = RoadtripFacade.new
     location_coordinates = roadtrip_facade.fetch_both_lat_lng(roadtrip_params[:origin], roadtrip_params[:destination])
 

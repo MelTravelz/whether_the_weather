@@ -9,14 +9,20 @@ class RoadtripFacade
 
   def fetch_both_lat_lng(from_origin, to_destination)
     coord_array = helper_fetch_both_lat_lng(from_origin, to_destination)
-    return "one or more invalid location names" if coord_array.count != 2  
+    if coord_array.count != 2  
+      return "one or more invalid location names" 
+    else
+      coord_array
+    end
   end
 
 
   def helper_fetch_both_lat_lng(from_origin, to_destination)
     location_array = [from_origin, to_destination]
+
     coord_array = location_array.map do |location_name|
-      info_hash = mapquest_service.fetch_lat_lng(location_name)
+      clean_location_name = location_name.downcase.delete(' ')
+      info_hash = mapquest_service.fetch_lat_lng(clean_location_name)
       if info_hash[:results].first[:locations].first[:source].present? 
         nil
       else

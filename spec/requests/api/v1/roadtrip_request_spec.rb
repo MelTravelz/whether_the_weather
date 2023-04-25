@@ -3,13 +3,17 @@ require "rails_helper"
 RSpec.describe "/road_trip" do
   describe "happy path tests" do
     before(:each) do
-      # ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
-      # stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
-      # .to_return(status: 200, body: ny_lat_lng, headers: {})
+      ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
+      .to_return(status: 200, body: ny_lat_lng, headers: {})
 
-      # la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
-      # stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
-      # .to_return(status: 200, body: la_lat_lng, headers: {})
+      la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
+      .to_return(status: 200, body: la_lat_lng, headers: {})
+
+      xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
+      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
+      .to_return(status: 200, body: xyz_abc, headers: {})
 
       ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
       stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
@@ -73,5 +77,25 @@ RSpec.describe "/road_trip" do
       expect(parsed_data).to eq(expected_hash)
     end
 
+    it "returns error message 404 when one or more location names are invalid" do
+      expected_hash = {
+        "errors":
+        [{
+            "status": '404',
+            "title": 'Invalid Request',
+            "detail": ["One or more location names are invalid."]
+          }]
+      }
+      hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+      user_params = { origin: "New York, NY", destination: "xyz,abc", api_key: hermione.api_key } 
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+    
+      parsed_data = JSON.parse(response.body, symbolize_names: true)
+require 'pry'; binding.pry
+      expect(response).to have_http_status(404)
+      expect(parsed_data).to eq(expected_hash)
+    end
   end
 end
