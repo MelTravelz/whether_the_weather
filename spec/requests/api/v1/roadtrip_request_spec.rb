@@ -20,7 +20,7 @@ RSpec.describe "/road_trip" do
       .to_return(status: 200, body: la_weather_info, headers: {})
     end
 
-    xit "returns a 'roadtrip' type json object" do
+    it "returns a 'roadtrip' type json object" do
       hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
       user_params = { origin: "New York, NY", destination: "Los Angeles, CA", api_key: hermione.api_key } 
 

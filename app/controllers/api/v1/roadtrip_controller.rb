@@ -2,7 +2,7 @@ class Api::V1::RoadtripController < ApplicationController
   before_action :check_user_credentials, only: [:index]
 
   def index
-# require 'pry'; binding.pry
+require 'pry'; binding.pry
   end
 
   private

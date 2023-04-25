@@ -7,10 +7,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     new_params = user_params
     new_params[:email] = new_params[:email].downcase
-    new_user = User.new(email: new_params[:email], password: params[:password])  
+    new_user = User.new(email: new_params[:email], password: params[:password], api_key: SecureRandom.hex)  
 
     if new_user && new_user.save 
-      new_user.update(api_key: SecureRandom.hex)
       # Refactor: add sessions
       # session[:id] = new_user.id
       render json: UsersSerializer.new(new_user), status: 201
@@ -37,7 +36,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def check_credentials_login
-    # require 'pry'; binding.pry
     if params[:email].nil? || params[:password].nil?
       render json: ErrorSerializer.new("Credentials cannot be missing.").invalid_request, status: 404
     end
