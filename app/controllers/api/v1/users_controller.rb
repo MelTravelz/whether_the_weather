@@ -10,18 +10,12 @@ class Api::V1::UsersController < ApplicationController
     new_user = User.new(email: new_params[:email], password: user_params[:password], api_key: SecureRandom.hex)  
 
     if new_user && new_user.save 
-      # Refactor: add sessions
-      # session[:id] = new_user.id
       render json: UsersSerializer.new(new_user), status: 201
-    else
-      render json: ErrorSerializer.new("404", "Credentials are incorrect.").invalid_request, status: 404
     end
   end
 
   def login
     if @returning_user && @returning_user.authenticate(user_params[:password]) 
-      # Refactor: add session:
-      # session[:id] = returning_user.id
       render json: UsersSerializer.new(@returning_user), status: 200
     else
       render json: ErrorSerializer.new("404", "Credentials are incorrect to login.").invalid_request, status: 404
