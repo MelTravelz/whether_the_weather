@@ -34,7 +34,7 @@ class RoadTripFacade
     all_weather_info = @weather_service.fetch_forecast(location_coords[1])
     
     arrival_hour_forecast = helper_arrival_forecast(all_weather_info, directions_hash[:route][:time])
-    
+
     new_hash = {
       start_city: location_names[0],
       end_city: location_names[1],

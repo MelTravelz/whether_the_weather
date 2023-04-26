@@ -7,7 +7,6 @@ class ForecastFacade
     @weather_service = WeatherService.new
   end
 
-    ###### Called only in Controller for sad path testing
     def find_location_lat_lng(location_name)
       info_hash = mapquest_service.fetch_lat_lng(location_name)
 
@@ -17,7 +16,6 @@ class ForecastFacade
         "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
       end
     end
-    #########
 
   def find_forecast_info(location_coordinates)
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
@@ -44,7 +42,7 @@ class ForecastFacade
   end
 
   def helper_daily_weather(all_weather_info)
-    all_weather_info[:forecast][:forecastday].first(5).map do |day|
+    all_weather_info[:forecast][:forecastday].map do |day|
       {
         date: day[:date],
         sunrise: day[:astro][:sunrise],

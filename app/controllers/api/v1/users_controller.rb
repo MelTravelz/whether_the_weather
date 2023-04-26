@@ -30,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def check_credentials_login
-    if user_params[:email].nil? || user_params[:password].nil?
+    if user_params[:email].nil? || user_params[:password].nil? 
       render json: ErrorSerializer.new("404", "Credentials cannot be missing.").invalid_request, status: 404
     end
   end
