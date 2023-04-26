@@ -7,7 +7,7 @@ class RoadTripFacade
     @weather_service = WeatherService.new
   end
 
-  def fetch_both_lat_lng(from_origin, to_destination)
+  def find_both_lat_lng(from_origin, to_destination)
     coord_array = helper_fetch_both_lat_lng(from_origin, to_destination)
     if coord_array.count != 2  
       return "one or more invalid location names" 
@@ -29,7 +29,7 @@ class RoadTripFacade
     end.compact
   end
 
-  def fetch_road_trip_info(location_names, location_coords)
+  def find_road_trip_forecast(location_names, location_coords)
     arrival_times = helper_fetch_direction_times(location_coords)
     all_weather_info = @weather_service.fetch_forecast(location_coords[1])
     arrival_hour_forecast = helper_arrival_forecast(all_weather_info, arrival_times[:seconds_to_arrival])

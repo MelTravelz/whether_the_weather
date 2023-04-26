@@ -43,6 +43,13 @@ RSpec.describe RoadTripFacade do
         end
       end
 
+      describe "#find_both_lat_lng" do
+        it "returns an array of both location coordinates" do
+          coordinate_array = @road_trip_facade.find_both_lat_lng("New York, NY", "Los Angeles, CA")
+          expect(coordinate_array).to eq(["40.71453,-74.00712", "34.05357,-118.24545"])
+        end
+      end
+
       describe "#helper_fetch_both_lat_lng" do
         it "returns an array of both location coordinates" do
           coordinate_array = @road_trip_facade.helper_fetch_both_lat_lng("New York, NY", "Los Angeles, CA")
@@ -50,16 +57,9 @@ RSpec.describe RoadTripFacade do
         end
       end
 
-      describe "#fetch_both_lat_lng" do
-        it "returns an array of both location coordinates" do
-          coordinate_array = @road_trip_facade.fetch_both_lat_lng("New York, NY", "Los Angeles, CA")
-          expect(coordinate_array).to eq(["40.71453,-74.00712", "34.05357,-118.24545"])
-        end
-      end
-
-      describe "#fetch_road_trip_info" do 
+      describe "#find_road_trip_forecast" do 
         it "returns a road_trip object" do
-          road_trip_info = @road_trip_facade.fetch_road_trip_info(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
+          road_trip_info = @road_trip_facade.find_road_trip_forecast(["New York, NY", "Los Angeles, CA"], ["40.71453,-74.00712", "34.05357,-118.24545"])
           
           expect(road_trip_info).to be_a(RoadTrip)
           expect(road_trip_info.start_city).to be_a(String)
@@ -96,6 +96,13 @@ RSpec.describe RoadTripFacade do
     end 
 
     describe "sad path tests" do
+      describe "#find_both_lat_lng" do
+        it "returns an error message when one or more location names are invalid" do
+          error_message = @road_trip_facade.find_both_lat_lng("New York, NY", "xyz,abc")
+          expect(error_message).to eq("one or more invalid location names")
+        end
+      end
+
       describe "#helper_fetch_both_lat_lng" do
         it "returns an array with single coordinate when one locaiton name is invalid" do  
           coordinate_array = @road_trip_facade.helper_fetch_both_lat_lng("New York, NY", "xyz,abc")
@@ -105,13 +112,6 @@ RSpec.describe RoadTripFacade do
         it "returns an empty array when both locaiton names are invalid" do  
           coordinate_array = @road_trip_facade.helper_fetch_both_lat_lng("xyz,abc", "xyz,abc")
           expect(coordinate_array).to eq([])
-        end
-      end
-
-      describe "#fetch_both_lat_lng" do
-        it "returns an error message when one or more location names are invalid" do
-          error_message = @road_trip_facade.fetch_both_lat_lng("New York, NY", "xyz,abc")
-          expect(error_message).to eq("one or more invalid location names")
         end
       end
     end
