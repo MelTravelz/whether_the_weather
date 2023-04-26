@@ -7,7 +7,18 @@ class ForecastFacade
     @weather_service = WeatherService.new
   end
 
-  def forecast_info(location_coordinates)
+    ###### Called only in Controller for sad path testing
+    def find_location_lat_lng(location_name)
+      info_hash = mapquest_service.fetch_lat_lng(location_name)
+      if info_hash[:results].first[:locations].first[:source].present? 
+        return "invalid location name"
+      else
+        "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
+      end
+    end
+    #########
+
+  def find_forecast_info(location_coordinates)
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
@@ -18,17 +29,6 @@ class ForecastFacade
 
     Forecast.new(new_all_weather_hash)
   end
-
-  ###### Called in Controller ONLY (after sad path testing)
-  def helper_fetch_lat_lng(location_name)
-    info_hash = mapquest_service.fetch_lat_lng(location_name)
-    if info_hash[:results].first[:locations].first[:source].present? 
-      return "invalid location name"
-    else
-      "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
-    end
-  end
-  #########
 
   def helper_current_weather(all_weather_info)
     {
@@ -44,10 +44,7 @@ class ForecastFacade
   end
 
   def helper_daily_weather(all_weather_info)
-    five_days = helper_5_days(all_weather_info)
-
-    # possible? all_weather_info.first(5).map do |day|
-    five_days.map do |day|
+    all_weather_info[:forecast][:forecastday].first(5).map do |day|
       {
         date: day[:date],
         sunrise: day[:astro][:sunrise],
@@ -57,12 +54,6 @@ class ForecastFacade
         condition: day[:day][:condition][:text],
         icon: day[:day][:condition][:icon]
       }
-    end
-  end
-
-  def helper_5_days(all_weather_info)
-    all_weather_info[:forecast][:forecastday].map do |forecast_day|
-      forecast_day
     end
   end
 

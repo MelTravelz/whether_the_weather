@@ -10,30 +10,8 @@ RSpec.describe "/road_trip" do
     end
 
   describe "#index" do
-    before(:each) do
-      ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
-      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
-      .to_return(status: 200, body: ny_lat_lng, headers: {})
-
-      la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
-      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
-      .to_return(status: 200, body: la_lat_lng, headers: {})
-
-      xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
-      stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
-      .to_return(status: 200, body: xyz_abc, headers: {})
-
-      ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
-      stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
-      .to_return(status: 200, body: ny_la_directions, headers: {})
-
-      la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
-      stub_request(:get, "http://api.weatherapi.com/v1/forecast.json?days=5&key=#{ENV["WEATHER_API_KEY"]}&q=34.05357,-118.24545")
-      .to_return(status: 200, body: la_weather_info, headers: {})
-    end
-
     describe "happy path tests" do
-      it "returns a 'road_trip' type json object" do
+      it "returns a 'road_trip' type json object (NY-LA)" do
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: "Los Angeles, CA", api_key: hermione.api_key } 
 
@@ -63,7 +41,7 @@ RSpec.describe "/road_trip" do
         {
           "errors":
           [{
-              "status": '404',
+              "status": '401',
               "title": 'Invalid Request',
               "detail": "Unauthorized request."
             }]
@@ -96,7 +74,7 @@ RSpec.describe "/road_trip" do
         expect(parsed_data).to eq(expected_hash)
       end
 
-      it "returns error message 404 when one or more location names are invalid" do
+      it "returns 404 when one or more location names are invalid" do
         expected_hash = {
           "errors":
           [{
@@ -107,6 +85,69 @@ RSpec.describe "/road_trip" do
         }
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: "xyz,abc", api_key: hermione.api_key } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+      
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(404)
+        expect(parsed_data).to eq(expected_hash)
+      end
+
+      it "returns 404 when 'impossible trip' is requested (NY-London,UK)" do
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": "Locations provided are an impossible roadtrip."
+            }]
+        }
+        hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { origin: "New York, NY", destination: "London, UK", api_key: hermione.api_key } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+      
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(404)
+        expect(parsed_data).to eq(expected_hash)
+      end
+
+      it "returns 404 when one or more location names are nil/missing" do
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": "One or more location names are missing."
+            }]
+        }
+        hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { origin: "New York, NY", destination: nil, api_key: hermione.api_key } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+      
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(404)
+        expect(parsed_data).to eq(expected_hash)
+      end
+
+      it "returns 404 when one or more location names are an empty string/missing" do
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": "One or more location names are missing."
+            }]
+        }
+        hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { origin: "New York, NY", destination: "", api_key: hermione.api_key } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)

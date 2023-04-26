@@ -11,7 +11,7 @@ RSpec.describe "/api/v1/users" do
 
   describe "#create" do
     describe "happy path tests" do
-      let(:user_params) { { email: "DumbledoreSchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!" } }
+      let(:user_params) { { email: "DracoSchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWizard!" } }
 
       it "can create a new user" do
         headers = {"CONTENT_TYPE" => "application/json"}
@@ -29,7 +29,7 @@ RSpec.describe "/api/v1/users" do
         expect(parsed_data[:data][:type]).to eq("users")
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
-        expect(parsed_data[:data][:attributes][:email]).to eq("dumbledoreschoolemail@hogwarts.com")
+        expect(parsed_data[:data][:attributes][:email]).to eq("dracoschoolemail@hogwarts.com")
         expect(parsed_data[:data][:attributes][:api_key]).to be_a(String)
         expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
@@ -48,7 +48,7 @@ RSpec.describe "/api/v1/users" do
       }
 
       it "returns error message when password & password_confirmation don't match" do
-        user_params = { email: "HarrySchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
+        user_params = { email: "DracoSchoolEmail@hogwarts.com", password: "ImmaWizard!", password_confirmation: "ImmaWrongPassword" } 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -57,8 +57,8 @@ RSpec.describe "/api/v1/users" do
         expect(error_response).to eq(expected_hash)
       end
 
-      it "returns error message when input is nil/empty" do
-        user_params = { email: nil, password: "ImmaWizard!", password_confirmation: "WizardIam!" } 
+      it "returns error message when email is nil/empty" do
+        user_params = { email: nil, password: "ImmaWizard!", password_confirmation: "ImmaWizard!" } 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
 
@@ -68,8 +68,8 @@ RSpec.describe "/api/v1/users" do
       end
 
       it "returns error message when email is already taken/not unique" do
-        harry = User.create({ email: "harryschoolemail@hogwarts.com", password: "ImmaWizard!", api_key: SecureRandom.hex })
-        user_params = { email: "HarrySchoolEmail@hogwarts.com", password: "NotHarry", password_confirmation: "NotHarry" } 
+        User.create({ email: "dracoschoolemail@hogwarts.com", password: "ImmaWizard!", api_key: "e8gt1h2i3s4_i9i10t115s6_l7" })
+        user_params = { email: "DracoSchoolEmail@hogwarts.com", password: "DracoAgain", password_confirmation: "DracoAgain" } 
         
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
@@ -84,8 +84,8 @@ RSpec.describe "/api/v1/users" do
   describe "#login" do
     describe "happy path tests" do
       it "can log in a user with valid credentials" do
-        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
-        user_params = { email: "RonSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!" } 
+        User.create({ email: "dracoschoolemail@hogwarts.com", password: "ImmaWizard!", api_key: "e8gt1h2i3s4_i9i10t115s6_l7" })
+        user_params = { email: "DracoSchoolEmail@hogwarts.com", password: "ImmaWizard!" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
@@ -100,7 +100,7 @@ RSpec.describe "/api/v1/users" do
         expect(parsed_data[:data][:type]).to eq("users")
         expect(parsed_data[:data][:attributes]).to be_a(Hash)
         expect(parsed_data[:data][:attributes].keys).to eq([:email, :api_key])
-        expect(parsed_data[:data][:attributes][:email]).to eq("ronschoolemail@hogwarts.com")
+        expect(parsed_data[:data][:attributes][:email]).to eq("dracoschoolemail@hogwarts.com")
         expect(parsed_data[:data][:attributes][:api_key]).to eq(User.last.api_key)
       end
     end
@@ -118,8 +118,8 @@ RSpec.describe "/api/v1/users" do
       }
       
       it "returns error message when password is invalid" do
-        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
-        user_params = { email: "RonSchoolEmail@hogwarts.com", password: "ImmaWrongPassword" } 
+        User.create({ email: "dracoschoolemail@hogwarts.com", password: "ImmaWizard!", api_key: "e8gt1h2i3s4_i9i10t115s6_l7" })
+        user_params = { email: "DracoSchoolEmail@hogwarts.com", password: "ImmaWrongPassword" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
@@ -131,8 +131,8 @@ RSpec.describe "/api/v1/users" do
       end
 
       it "returns error message when email is invalid" do
-        ron = User.create({ email: "ronschoolemail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
-        user_params = { email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!" } 
+        User.create({ email: "dracoschoolemail@hogwarts.com", password: "ImmaWizard!", api_key: "e8gt1h2i3s4_i9i10t115s6_l7" })
+        user_params = { email: "NotDracoSchoolEmail@hogwarts.com", password: "ImmaWizard!" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)
@@ -152,8 +152,7 @@ RSpec.describe "/api/v1/users" do
               "detail": "Credentials cannot be missing."
             }]
         }
-
-        user_params = { email: nil, password: "ImmaWizardtoo!" } 
+        user_params = { email: nil, password: "ImmaWizard!" } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/sessions", headers: headers, params: JSON.generate(user_params)

@@ -9,10 +9,9 @@ RSpec.describe MapQuestService do
         .to_return(status: 200, body: ny_lat_lng, headers: {})
 
         response = MapQuestService.new.fetch_lat_lng("newyork,ny")
-        keys = %i[info options results]
 
         expect(response).to be_a(Hash)
-        expect(response.keys).to eq(keys)
+        expect(response.keys).to eq([:info, :options, :results])
       end
     end
 
@@ -25,10 +24,9 @@ RSpec.describe MapQuestService do
         # New York, NY coordinates = 40.71453,-74.00712
         # Los Angeles, CA coordinates = 34.05357,-118.24545
         response = MapQuestService.new.fetch_directions("40.71453,-74.00712", "34.05357,-118.24545")
-        keys = %i[route info]
 
         expect(response).to be_a(Hash)
-        expect(response.keys).to eq(keys)
+        expect(response.keys).to eq([:route, :info])
       end
     end
 

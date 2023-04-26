@@ -11,7 +11,9 @@ class MapQuestService
       faraday.params["from"] = from_coord
       faraday.params["to"] = to_coord
     end
-    JSON.parse(response.body, symbolize_names: true)
+    parsed_data = JSON.parse(response.body, symbolize_names: true)
+    return [:error] if parsed_data[:info][:statuscode] == 402
+    parsed_data
   end
 
   private
