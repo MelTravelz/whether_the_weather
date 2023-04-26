@@ -10,8 +10,8 @@ Then, you came to the right place!
 <br>
 
 ```
-Whether the weather be hot,
-or whether the weather be cold, 
+Whether the weather be cold,
+or whether the weather be hot, 
 we'll be together, 
 whatever the weather, 
 whether you like it or not! 
