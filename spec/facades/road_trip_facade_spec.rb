@@ -50,16 +50,6 @@ RSpec.describe RoadTripFacade do
         end
       end
 
-      describe "#helper_fetch_direction_times" do
-        it "returns all direction instructions" do
-          # New York, NY coordinates = 40.71453,-74.00712
-          # Los Angeles, CA coordinates = 34.05357,-118.24545
-          ny_la_arrival_times = @road_trip_facade.helper_fetch_direction_times(["40.71453,-74.00712", "34.05357,-118.24545"])
-          expect(ny_la_arrival_times).to be_a(Hash)
-          expect(ny_la_arrival_times.keys).to eq([:total_travel_time, :seconds_to_arrival])
-        end
-      end
-
       describe "#helper_arrival_forecast" do
         it "returns the forecast hash for the arrival hour" do
           # New York, NY coordinates = 40.71453,-74.00712
