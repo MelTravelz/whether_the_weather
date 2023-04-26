@@ -10,7 +10,12 @@ class Api::V1::RoadTripController < ApplicationController
     else
       location_names = [road_trip_params[:origin], road_trip_params[:destination]]
       road_trip_forecast = road_trip_facade.find_road_trip_forecast(location_names, location_coordinates)
-      render json: RoadTripSerializer.new(road_trip_forecast)
+      
+      if road_trip_forecast == "impossible trip"
+        render json: ErrorSerializer.new("Locations provided = impossible roadtrip.").invalid_request, status: 401
+      else
+        render json: RoadTripSerializer.new(road_trip_forecast)
+      end
     end
   end
 

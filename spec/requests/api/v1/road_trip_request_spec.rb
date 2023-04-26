@@ -33,7 +33,7 @@ RSpec.describe "/road_trip" do
     end
 
     describe "happy path tests" do
-      it "returns a 'road_trip' type json object" do
+      it "returns a 'road_trip' type json object (NY-LA)" do
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: "Los Angeles, CA", api_key: hermione.api_key } 
 
@@ -56,6 +56,32 @@ RSpec.describe "/road_trip" do
         expect(parsed_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
         expect(parsed_data[:data][:attributes][:weather_at_eta].keys).to eq([:datetime, :temperature, :condition])
       end
+
+      # SAD PATH
+      it "returns a 'road_trip' type json object (NY-LONDON)" do
+        hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { origin: "New York, NY", destination: "London, UK", api_key: hermione.api_key } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+      
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(401)
+        
+        # expect(parsed_data).to be_a(Hash)
+        # expect(parsed_data.keys).to eq([:data])
+        # expect(parsed_data[:data]).to be_a(Hash)
+        # expect(parsed_data[:data].keys).to eq([:id, :type, :attributes])
+
+        # expect(parsed_data[:data][:id]).to eq(nil)
+        # expect(parsed_data[:data][:type]).to eq("road_trip")
+        # expect(parsed_data[:data][:attributes]).to be_a(Hash)
+        # expect(parsed_data[:data][:attributes].keys).to eq([:start_city, :end_city, :travel_time, :weather_at_eta])
+        # expect(parsed_data[:data][:attributes][:weather_at_eta]).to be_a(Hash)
+        # expect(parsed_data[:data][:attributes][:weather_at_eta].keys).to eq([:datetime, :temperature, :condition])
+      end
+
     end
 
     describe "sad path tests" do
