@@ -7,7 +7,18 @@ class ForecastFacade
     @weather_service = WeatherService.new
   end
 
-  def forecast_info(location_coordinates)
+    ###### Called only in Controller for sad path testing
+    def find_location_lat_lng(location_name)
+      info_hash = mapquest_service.fetch_lat_lng(location_name)
+      if info_hash[:results].first[:locations].first[:source].present? 
+        return "invalid location name"
+      else
+        "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
+      end
+    end
+    #########
+
+  def find_forecast_info(location_coordinates)
     all_weather_info = weather_service.fetch_forecast(location_coordinates)
 
     new_all_weather_hash = {
@@ -18,17 +29,6 @@ class ForecastFacade
 
     Forecast.new(new_all_weather_hash)
   end
-
-  ###### Called only in Controller for sad path testing
-  def helper_fetch_lat_lng(location_name)
-    info_hash = mapquest_service.fetch_lat_lng(location_name)
-    if info_hash[:results].first[:locations].first[:source].present? 
-      return "invalid location name"
-    else
-      "#{info_hash[:results].first[:locations].first[:latLng][:lat]},#{info_hash[:results].first[:locations].first[:latLng][:lng]}"
-    end
-  end
-  #########
 
   def helper_current_weather(all_weather_info)
     {
