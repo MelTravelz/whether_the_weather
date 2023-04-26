@@ -22,7 +22,6 @@ whether you like it or not!
 <br>
 
 ## Learning Goals
-<hr>
 
 - Consume 2+ external endpoints
 - Build 4 endpoints that return JSON responses
@@ -33,7 +32,6 @@ whether you like it or not!
 <br>
 
 ## Getting Started
-<hr>
 
 If you'd like to demo this API on your local machine:
 - Ensure you have all prerequisites & API keys
@@ -51,7 +49,6 @@ If you'd like to demo this API on your local machine:
 <br>
 
 ## Grab your API key
-<hr>
 
 Sign up for your own API Keys:
 - [MapQuest API Key](https://developer.mapquest.com/user/login/sign-up)
@@ -60,7 +57,6 @@ Sign up for your own API Keys:
 <br>
 
 ## Prerequisites
-<hr>
 
 - Ruby Version 3.1.1
 - Rails Version 7.0.4.x
@@ -69,9 +65,6 @@ Sign up for your own API Keys:
 <br>
 
 ## Happy Path Endpoints
-<hr>
-
-<br>
 
 `GET "/api/v1/forecast"`
 
@@ -117,6 +110,8 @@ Response:
 ```
 
 <br>
+<hr>
+<br>
 
 `POST "/api/v1/users"`
 
@@ -148,6 +143,8 @@ Response:
 ```
 
 <br>
+<hr>
+<br>
 
 `POST "/api/v1/sessions"`
 
@@ -172,6 +169,8 @@ Response:
 }
 ```
 
+<br>
+<hr>
 <br>
 
 `POST "/api/v1/road_trip"`
