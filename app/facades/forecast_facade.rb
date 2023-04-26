@@ -10,6 +10,7 @@ class ForecastFacade
     ###### Called only in Controller for sad path testing
     def find_location_lat_lng(location_name)
       info_hash = mapquest_service.fetch_lat_lng(location_name)
+
       if info_hash[:results].first[:locations].first[:source].present? 
         return "invalid location name"
       else
@@ -26,7 +27,6 @@ class ForecastFacade
       daily_weather: helper_daily_weather(all_weather_info),
       hourly_weather: helper_hourly_weather(all_weather_info)
     }
-
     Forecast.new(new_all_weather_hash)
   end
 

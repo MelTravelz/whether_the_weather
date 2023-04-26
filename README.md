@@ -16,7 +16,7 @@ we'll be together,
 whatever the weather, 
 whether you like it or not! 
 
-...cuz we're going on a roadtrip, oh yea baby!
+...cuz we're going on a roadtrip, baby!
 ```
 
 <br>
