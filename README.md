@@ -118,14 +118,9 @@ Response:
 Request Body:
 ```
 {
-    "data": {
-        "id": "155",
-        "type": "users",
-        "attributes": {
-            "email": "whatever@example.com",
-            "api_key": "c4ac36f7672d32a72df17863933f7377"
-        }
-    }
+  "email": "whatever@example.com",
+  "password": "password",
+  "password_confirmation": "password"
 }
 ```
 Response:
