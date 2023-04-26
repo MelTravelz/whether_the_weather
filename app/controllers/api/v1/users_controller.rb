@@ -7,9 +7,10 @@ class Api::V1::UsersController < ApplicationController
   def create
     new_params = user_params
     new_params[:email] = new_params[:email].downcase
-    new_user = User.new(email: new_params[:email], password: user_params[:password], api_key: SecureRandom.hex)  
+    new_user = User.new(email: new_params[:email], password: user_params[:password])   
 
     if new_user && new_user.save 
+      new_user.update(api_key: SecureRandom.hex)
       render json: UsersSerializer.new(new_user), status: 201
     end
   end
@@ -24,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def check_credentials_create
-    if user_params[:email].nil? || user_params[:password].nil? || user_params[:password_confirmation].nil? || user_params[:password] != user_params[:password_confirmation] || User.find_by(email: user_params[:email].downcase) || user_params[:email] == ""
+    if user_params[:email].nil? || user_params[:password].nil? || user_params[:password_confirmation].nil? || user_params[:password] != user_params[:password_confirmation] || User.find_by(email: user_params[:email].downcase) || user_params[:email] == "" || user_params[:password] == ""
       render json: ErrorSerializer.new("404", "Credentials are incorrect.").invalid_request, status: 404
     end
   end
