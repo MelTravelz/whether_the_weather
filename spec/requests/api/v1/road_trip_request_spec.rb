@@ -116,7 +116,7 @@ RSpec.describe "/road_trip" do
         expect(parsed_data).to eq(expected_hash)
       end
 
-      it "returns 404 when one or more location names are missing" do
+      it "returns 404 when one or more location names are nil/missing" do
         expected_hash = {
           "errors":
           [{
@@ -127,6 +127,27 @@ RSpec.describe "/road_trip" do
         }
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: nil, api_key: hermione.api_key } 
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+      
+        parsed_data = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to have_http_status(404)
+        expect(parsed_data).to eq(expected_hash)
+      end
+
+      it "returns 404 when one or more location names are an empty string/missing" do
+        expected_hash = {
+          "errors":
+          [{
+              "status": '404',
+              "title": 'Invalid Request',
+              "detail": "One or more location names are missing."
+            }]
+        }
+        hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
+        user_params = { origin: "New York, NY", destination: "", api_key: hermione.api_key } 
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)

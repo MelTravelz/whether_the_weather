@@ -28,7 +28,7 @@ class Api::V1::RoadTripController < ApplicationController
   end
 
   def check_locations_nil
-    if road_trip_params[:origin] == nil || road_trip_params[:destination] == nil
+    if road_trip_params[:origin] == nil || road_trip_params[:destination] == nil || road_trip_params[:origin] == "" || road_trip_params[:destination] == ""
       render json: ErrorSerializer.new("404", "One or more location names are missing.").invalid_request, status: 404
     end
   end

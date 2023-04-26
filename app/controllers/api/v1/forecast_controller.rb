@@ -14,7 +14,7 @@ class Api::V1::ForecastController < ApplicationController
   end
 
   def check_location_nil
-    if params[:location] == ""
+    if params[:location] == "" || params[:location] == nil
       render json: ErrorSerializer.new("404", "Location name cannot be blank.").invalid_request, status: 404
     end
   end
