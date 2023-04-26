@@ -1,5 +1,6 @@
 class ErrorSerializer
-  def initialize(errors)
+  def initialize(status, errors)
+    @status = status
     @errors = errors
   end
 
@@ -7,7 +8,7 @@ class ErrorSerializer
     {
       errors: [
         {
-          "status": '404',
+          "status": @status,
           "title": 'Invalid Request',
           "detail": @errors
         }
