@@ -15,9 +15,16 @@ RSpec.describe "/road_trip" do
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: "Los Angeles, CA", api_key: hermione.api_key } 
 
-        headers = {"CONTENT_TYPE" => "application/json"}
-        post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
+        ######
+        # headers = {"CONTENT_TYPE" => "application/json"}
+          post "/api/v1/road_trip", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: JSON.generate(user_params)
       
+          headers = response.request.headers.to_h.deep_symbolize_keys
+
+          expect(headers[:CONTENT_TYPE]).to eq("application/json")
+          expect(headers[:HTTP_ACCEPT]).to eq("application/json")
+        #### This tests that the headers mimic the true content type
+
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to have_http_status(200)

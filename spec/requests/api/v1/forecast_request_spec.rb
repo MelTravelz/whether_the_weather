@@ -39,6 +39,7 @@ RSpec.describe "/api/v1/forecast" do
 
         expect(parsed_data[:data][:attributes][:current_weather]).to be_a(Hash)
         expect(parsed_data[:data][:attributes][:current_weather].keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :condition, :icon])
+        # don't do this:
         # expect(parsed_data[:data][:attributes][:current_weather][:last_updated]).to eq("2023-04-22 17:00")
         # expect(parsed_data[:data][:attributes][:current_weather][:temperature]).to eq(79)
         # expect(parsed_data[:data][:attributes][:current_weather][:feels_like]).to eq(77.4)
