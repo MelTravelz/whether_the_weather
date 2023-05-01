@@ -35,5 +35,9 @@ module WhetherTheWeather
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Added these lines to "turn on" Cookie Store:
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_whether_the_weather_key'
   end
 end

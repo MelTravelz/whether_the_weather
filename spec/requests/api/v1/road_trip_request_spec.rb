@@ -9,21 +9,56 @@ RSpec.describe "/road_trip" do
       WebMock.disable_net_connect!
     end
 
+  before(:each) do
+    # This stubs the current time to match the fixture files: 
+    fixed_time = Time.new(2023, 4, 25, 12, 15, 40, "-06:00")
+    allow(Time).to receive(:now).and_return(fixed_time)
+  
+    ny_lat_lng = File.read("spec/fixtures/map_quest/ny_lat_lng.json")
+    stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=newyork,ny")
+    .to_return(status: 200, body: ny_lat_lng, headers: {})
+
+    la_lat_lng = File.read("spec/fixtures/map_quest/la_lat_lng.json")
+    stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=losangeles,ca")
+    .to_return(status: 200, body: la_lat_lng, headers: {})
+
+    la_weather_info = File.read("spec/fixtures/weather/la_forecast.json")
+    stub_request(:get, "http://api.weatherapi.com/v1/forecast.json?days=5&key=#{ENV["WEATHER_API_KEY"]}&q=34.05357,-118.24545")
+    .to_return(status: 200, body: la_weather_info, headers: {})
+
+    ny_la_directions = File.read("spec/fixtures/map_quest/ny_la_directions.json")
+    stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=34.05357,-118.24545")
+    .to_return(status: 200, body: ny_la_directions, headers: {})
+
+    ny_london_directions = File.new("spec/fixtures/map_quest/ny_london_lat_lng.json")
+    stub_request(:get, "https://www.mapquestapi.com/directions/v2/route?from=40.71453,-74.00712&key=#{ENV["MAPQUEST_API_KEY"]}&to=51.50643,-0.12719")
+    .to_return(status: 200, body: ny_london_directions, headers: {})
+
+    london_lat_lng = File.read("spec/fixtures/map_quest/london_lat_lng.json")
+    stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=london,uk")
+    .to_return(status: 200, body: london_lat_lng, headers: {})
+
+    xyz_abc = File.read("spec/fixtures/map_quest/xyzabc_lat_lng.json")
+    stub_request(:get, "https://www.mapquestapi.com/geocoding/v1/address?key=#{ENV["MAPQUEST_API_KEY"]}&location=xyz,abc")
+    .to_return(status: 200, body: xyz_abc, headers: {})
+  end
+
   describe "#index" do
     describe "happy path tests" do
       it "returns a 'road_trip' type json object (NY-LA)" do
         hermione = User.create({ email: "HermioneSchoolEmail@hogwarts.com", password: "ImmaWizardtoo!", api_key: SecureRandom.hex })
         user_params = { origin: "New York, NY", destination: "Los Angeles, CA", api_key: hermione.api_key } 
 
-        ######
+        ###### Changes made to be able to test headers: 
         # headers = {"CONTENT_TYPE" => "application/json"}
           post "/api/v1/road_trip", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: JSON.generate(user_params)
       
           headers = response.request.headers.to_h.deep_symbolize_keys
 
+          # This tests that the headers mimic the true content type:
           expect(headers[:CONTENT_TYPE]).to eq("application/json")
           expect(headers[:HTTP_ACCEPT]).to eq("application/json")
-        #### This tests that the headers mimic the true content type
+        #### 
 
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
@@ -116,7 +151,6 @@ RSpec.describe "/road_trip" do
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/road_trip", headers: headers, params: JSON.generate(user_params)
-      
         parsed_data = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to have_http_status(404)
