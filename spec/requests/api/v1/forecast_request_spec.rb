@@ -39,6 +39,7 @@ RSpec.describe "/api/v1/forecast" do
 
         expect(parsed_data[:data][:attributes][:current_weather]).to be_a(Hash)
         expect(parsed_data[:data][:attributes][:current_weather].keys).to eq([:last_updated, :temperature, :feels_like, :humidity, :uvi, :visibility, :condition, :icon])
+        # don't do this:
         # expect(parsed_data[:data][:attributes][:current_weather][:last_updated]).to eq("2023-04-22 17:00")
         # expect(parsed_data[:data][:attributes][:current_weather][:temperature]).to eq(79)
         # expect(parsed_data[:data][:attributes][:current_weather][:feels_like]).to eq(77.4)
@@ -51,6 +52,7 @@ RSpec.describe "/api/v1/forecast" do
         
         expect(parsed_data[:data][:attributes][:daily_weather]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:daily_weather].first.keys).to eq([:date, :sunrise, :sunset, :max_temp, :min_temp, :condition, :icon])
+        # don't do this:
         # expect(parsed_data[:data][:attributes][:daily_weather].first[:date]).to eq("2023-04-22")
         # expect(parsed_data[:data][:attributes][:daily_weather].first[:sunrise]).to eq("06:13 AM")
         # expect(parsed_data[:data][:attributes][:daily_weather].first[:sunset]).to eq("07:30 PM")
@@ -62,6 +64,7 @@ RSpec.describe "/api/v1/forecast" do
         
         expect(parsed_data[:data][:attributes][:hourly_weather]).to be_an(Array)
         expect(parsed_data[:data][:attributes][:hourly_weather].first.keys).to eq([:time, :temperature, :conditions, :icon])
+        # don't do this:
         # expect(parsed_data[:data][:attributes][:hourly_weather].first[:time]).to eq("00:00")
         # expect(parsed_data[:data][:attributes][:hourly_weather].first[:temperature]).to eq(69.8)
         # expect(parsed_data[:data][:attributes][:hourly_weather].first[:conditions]).to eq("Clear")

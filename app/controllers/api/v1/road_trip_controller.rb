@@ -3,6 +3,7 @@ class Api::V1::RoadTripController < ApplicationController
   before_action :check_locations_nil, only: [:index]
 
   def index
+    # @current_user (would need this line to call on current user if had other actions)
     road_trip_facade = RoadTripFacade.new
     location_coordinates = road_trip_facade.find_both_lat_lng(road_trip_params[:origin], road_trip_params[:destination])
 
@@ -19,6 +20,12 @@ class Api::V1::RoadTripController < ApplicationController
       end
     end
   end
+
+  # possible ways to logout:
+  # def logout
+  #   reset_session
+  #   reset_session(@current_user.id)
+  # end
 
   private
   def check_user_credentials
