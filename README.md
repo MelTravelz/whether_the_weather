@@ -50,7 +50,7 @@ whether you like it or not!
 If you'd like to demo this API on your local machine:
 - Ensure you have all prerequisites & API keys
 - Clone this repo: `git clone git@github.com:MelTravelz/whether_the_weather.git`
-- Navigate to the rood directory: `cd whether_the_weather`
+- Navigate to the root directory: `cd whether_the_weather`
 - Then run:
     - `bundle install`
     - `bundle exec figaro install`
