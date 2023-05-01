@@ -12,7 +12,6 @@ Then, you came to the right place!
 `Whether the Weather` was inspired by this wickedly witty tongue twister:
 
 <br>
-<br>
  
 ```
 Whether the weather be cold,
