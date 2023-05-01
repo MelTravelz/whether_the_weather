@@ -1,14 +1,16 @@
-# Whether the Weather
 
+<div align="center">
+ <img src="https://user-images.githubusercontent.com/116964982/235387042-3de64347-a359-409e-a849-868e9eb74fe9.jpeg" alt="Logo" width="250" height="250">
+
+<br>
+
+---
+<br>
 Need to determine the weather forecast at your road trip arrival destination?
-Then, you came to the right place!
+Then, you came to the right place! `Whether the Weather` was inspired by this wickedly witty tongue twister:
 
 <br>
-
-`Whether the Weather` was inspired by this wickedly witty tongue twister:
-
-<br>
-
+ 
 ```
 Whether the weather be cold,
 or whether the weather be hot, 
@@ -18,16 +20,26 @@ whether you like it or not!
 
 ...cuz we're going on a roadtrip, baby!
 ```
+</div>
+<br>
 
+---
 <br>
 
 ## Learning Goals
 
 - Consume 2+ external endpoints
-- Build 4 endpoints that return JSON responses
-- Develop robust happy & sad path tests
-- Authenticate users 
+- Expose an API that aggregates data from multiple external APIs
+- Ensure that API requires authentication
+- Test both API consumption & exposure use a mocking tool (Webmock)
+- Develop robust happy & sad path tests 
 - Refactor code for better readability
+
+<br>
+
+## Built With
+![Ruby on Rails](https://img.shields.io/badge/Ruby_on_Rails-CC0000?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
+
 
 <br>
 
@@ -36,6 +48,7 @@ whether you like it or not!
 If you'd like to demo this API on your local machine:
 - Ensure you have all prerequisites & API keys
 - Clone this repo: `git clone git@github.com:MelTravelz/whether_the_weather.git`
+- Navigate to the rood directory: `cd whether_the_weather`
 - Then run:
     - `bundle install`
     - `bundle exec figaro install`
@@ -44,7 +57,8 @@ If you'd like to demo this API on your local machine:
     - `MAPQUEST_API_KEY: api_key_add_here`
     - `WEATHER_API_KEY: api_key_add_here`
 - To run all tests run:
-    - `bundle exec rspec`
+    - `bundle exec rspec` 
+
 
 <br>
 
@@ -54,6 +68,7 @@ Sign up for your own API Keys:
 - [MapQuest API Key](https://developer.mapquest.com/user/login/sign-up)
 - [Weather API Key](https://www.weatherapi.com/signup.aspx)
 
+
 <br>
 
 ## Prerequisites
@@ -62,6 +77,9 @@ Sign up for your own API Keys:
 - Rails Version 7.0.4.x
 - Bundler Version 2.4.9
 
+<br>
+
+---
 <br>
 
 ## Happy Path Endpoints
