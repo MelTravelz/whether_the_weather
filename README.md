@@ -138,9 +138,9 @@ Response:
 Request Body:
 ```
 {
-  "email": "whatever@example.com",
-  "password": "password",
-  "password_confirmation": "password"
+  "email": "carmensandiego@world.com",
+  "password": "where_in_the_world",
+  "password_confirmation": "where_in_the_world"
 }
 ```
 Response:
@@ -150,8 +150,8 @@ Response:
         "id": "155",
         "type": "users",
         "attributes": {
-            "email": "whatever@example.com",
-            "api_key": "c4ac36f7672d32a72df17863933f7377"
+            "email": "carmensandiego@world.com",
+            "api_key": "123_api_456_key_789"
         }
     }
 }
@@ -166,8 +166,8 @@ Response:
 Request Body:
 ```
 {
-  "email": "whatever@example.com",
-  "password": "password"
+  "email": "carmensandiego@world.com",
+  "password": "where_in_the_world"
 }
 ```
 Response:
@@ -177,8 +177,8 @@ Response:
         "id": "155",
         "type": "users",
         "attributes": {
-            "email": "whatever@example.com",
-            "api_key": "c4ac36f7672d32a72df17863933f7377"
+            "email": "carmensandiego@world.com",
+            "api_key": "123_api_456_key_789"
         }
     }
 }
@@ -195,7 +195,7 @@ Request Body:
 {
   "origin": "New York, NY",
   "destination": "Los Angeles, CA",
-  "api_key": "t1h2i3s4_i5s6_l7e8g9i10t11"
+  "api_key": "123_api_456_key_789"
 }
 ```
 Response: 
