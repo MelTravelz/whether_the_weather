@@ -7,8 +7,11 @@
 ---
 <br>
 Need to determine the weather forecast at your road trip arrival destination?
-Then, you came to the right place! `Whether the Weather` was inspired by this wickedly witty tongue twister:
+Then, you came to the right place! 
 
+`Whether the Weather` was inspired by this wickedly witty tongue twister:
+
+<br>
 <br>
  
 ```
